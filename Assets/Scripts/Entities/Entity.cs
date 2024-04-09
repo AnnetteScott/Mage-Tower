@@ -7,11 +7,11 @@ public class Entity
     private int experience;
 
 
-    public Entity(int xp)
+    public Entity()
     {
-        experience = xp;
-        health = 10 * getLevel();
-        maxHealth = 10 * getLevel();
+        experience = 0;
+        health = 10;
+        maxHealth = 10;
     }
 
     /// <summary>
