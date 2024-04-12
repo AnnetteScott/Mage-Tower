@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-    public Character characterScript;
     public GameObject pointA;
     public GameObject pointB;
     public float speed;
     private float distance;
     private float percentage;
+
+    public void Start()
+    {
+        init();
+    }
 
     private void Update()
     {
@@ -25,18 +29,6 @@ public class Enemy : Entity
         {
             flip();
             swapVectors();
-        }
-    }
-
-    /// <summary>
-    /// Collision detection
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag.Equals("Player"))
-        {
-            characterScript.takeDamage(damage);
         }
     }
 
@@ -70,5 +62,13 @@ public class Enemy : Entity
         Gizmos.DrawWireSphere(pointA.transform.position, 0.5f);
         Gizmos.DrawWireSphere(pointB.transform.position, 0.5f);
         Gizmos.DrawLine(pointA.transform.position, pointB.transform.position);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<Player>().takeDamage(damage);
+        }
     }
 }
