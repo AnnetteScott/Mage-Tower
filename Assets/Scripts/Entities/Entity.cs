@@ -1,10 +1,12 @@
+using System;
 using UnityEngine;
 
-public class Entity
+public class Entity : MonoBehaviour
 {
     private int health;
     private int maxHealth;
     private int experience;
+    public int damage;
 
 
     public Entity()
@@ -12,6 +14,7 @@ public class Entity
         experience = 0;
         health = 10;
         maxHealth = 10;
+        damage = 2;
     }
 
     /// <summary>
@@ -39,7 +42,7 @@ public class Entity
     public void addExperience(int experience)
     {
         int currentLevel = getLevel();
-        this.experience += experience;
+        this.experience += Mathf.Abs(experience);
         int newLevel = getLevel();
 
         if(currentLevel != newLevel)
@@ -60,17 +63,23 @@ public class Entity
     /// Decrease the health of the entity after taking damage
     /// </summary>
     /// <param name="damage"></param>
-    public void takeDamage(int damage)
+    /// <returns>int of the remaining health</returns>
+    public int takeDamage(int damage)
     {
         this.health -= Mathf.Abs(damage);
 
-        if(this.health < 0)
+        if(this.health <= 0)
         {
-            //Entity is dead
+            Destroy(gameObject);
         }
+
+        return this.health;
     }
 
-    public void levelUp()
+    /// <summary>
+    /// Level up the entity
+    /// </summary>
+    private void levelUp()
     {
         this.maxHealth += 20;
         this.health = maxHealth;
