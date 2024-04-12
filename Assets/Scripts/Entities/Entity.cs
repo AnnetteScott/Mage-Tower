@@ -3,19 +3,19 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    private int health;
-    private int maxHealth;
-    private int experience;
+    public int maxHealth;
     public int damage;
+    private int health;
+    private int experience;
 
-
-    public Entity()
+    /// <summary>
+    /// 
+    /// </summary>
+    public void init()
     {
-        experience = 0;
-        health = 10;
-        maxHealth = 10;
-        damage = 2;
+        health = maxHealth;
     }
+
 
     /// <summary>
     /// Gets the health of the entity
@@ -66,11 +66,11 @@ public class Entity : MonoBehaviour
     /// <returns>int of the remaining health</returns>
     public int takeDamage(int damage)
     {
-        this.health -= Mathf.Abs(damage);
+        health -= Mathf.Abs(damage);
 
         if(this.health <= 0)
         {
-            Destroy(gameObject);
+            //Entity Dead
         }
 
         return this.health;
