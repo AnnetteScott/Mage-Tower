@@ -70,10 +70,18 @@ public class Entity : MonoBehaviour
 
         if(this.health <= 0)
         {
-            //Entity Dead
+            died();
         }
 
         return this.health;
+    }
+
+    /// <summary>
+    /// The entity has died
+    /// </summary>
+    public void died()
+    {
+        Destroy(gameObject);
     }
 
     /// <summary>
