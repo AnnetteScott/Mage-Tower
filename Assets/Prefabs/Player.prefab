@@ -143,8 +143,26 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
     m_Flags: 0
+  run:
+    m_Name: Run
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 1c8710a2-1936-42ba-baa8-229aab9e6618
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 7104b29c-87e1-4417-9f71-554693bc314c
+      m_Path: <Keyboard>/leftShift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Run
+      m_Flags: 0
+    m_Flags: 0
   jumpHeight: 6
   walkingSpeed: 4
+  runningSpeed: 6
 --- !u!50 &4138901212300328911
 Rigidbody2D:
   serializedVersion: 4
