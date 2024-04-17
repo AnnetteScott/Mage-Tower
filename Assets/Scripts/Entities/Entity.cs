@@ -52,14 +52,6 @@ public class Entity : MonoBehaviour
     }
 
     /// <summary>
-    /// Hit with melee weapon
-    /// </summary>
-    public void hit()
-    {
-        
-    }
-
-    /// <summary>
     /// Decrease the health of the entity after taking damage
     /// </summary>
     /// <param name="damage"></param>

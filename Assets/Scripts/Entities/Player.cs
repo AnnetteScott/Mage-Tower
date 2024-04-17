@@ -7,17 +7,21 @@ public class Player : Entity
 {
     public InputAction move;
     public InputAction run;
+    public InputAction mouse;
     public float jumpHeight;
     public float walkingSpeed;
     public float runningSpeed;
     private Rigidbody2D rigidBody;
-    private bool onGround;
+    private bool onGround = true;
+    private float hittingTimer = 0;
+    public float hitTimeOut = 0.5f;
+    public Animator animator;
 
     void Start()
     {
         init();
-        onGround = true;
         move.Enable();
+        mouse.Enable();
         run.Enable();
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.freezeRotation = true;
@@ -27,6 +31,7 @@ public class Player : Entity
     void Update()
     {
         movePlayer();
+        attack();
     }
 
     private void movePlayer()
@@ -67,6 +72,33 @@ public class Player : Entity
         else
         {
             rigidBody.velocity = new Vector2(0, rigidBody.velocity.y);
+        }
+    }
+
+    private void attack()
+    {
+        if (mouse.IsPressed() && hittingTimer <= 0)
+        {
+            hittingTimer = hitTimeOut;
+            animator.Play("Staff Hit", -1, 0f);
+            animator.SetBool("isHitting", true);
+            animator.SetBool("isHitting", false);
+            //hit
+        }
+
+        if (hittingTimer > 0)
+        {
+            hittingTimer -= Time.deltaTime;
+
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") && hittingTimer > 0.02f)
+        {
+            GameObject enemy = collision.gameObject;
+            enemy.GetComponent<Enemy>().takeDamage(damage);
         }
     }
 

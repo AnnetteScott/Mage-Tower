@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  damage: 2
+  damage: 4
   move:
     m_Name: Move
     m_Type: 0
@@ -160,9 +160,28 @@ MonoBehaviour:
       m_Action: Run
       m_Flags: 0
     m_Flags: 0
+  mouse:
+    m_Name: Mouse
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 9a807188-6312-4cd6-9a1c-6082b654acec
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 31aa31ee-5399-4006-89c1-608471ffcd26
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Mouse
+      m_Flags: 0
+    m_Flags: 0
   jumpHeight: 6
   walkingSpeed: 4
   runningSpeed: 6
+  hitTimeOut: 0.5
+  animator: {fileID: 7551898441931071769}
 --- !u!50 &4138901212300328911
 Rigidbody2D:
   serializedVersion: 4
@@ -246,6 +265,7 @@ GameObject:
   - component: {fileID: 7012857603824485440}
   - component: {fileID: 6370707077601182753}
   - component: {fileID: 9212685262922634899}
+  - component: {fileID: 7551898441931071769}
   m_Layer: 0
   m_Name: Staff
   m_TagString: Weapon
@@ -349,10 +369,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.52, y: 0.2}
+  m_Offset: {x: 0.52, y: 0.23}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -363,5 +383,26 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.82, y: 2.95}
+  m_Size: {x: 0.82, y: 3.01}
   m_EdgeRadius: 0
+--- !u!95 &7551898441931071769
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8538221143748238943}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 39434899666377b4c9f3c57761a86cbd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
