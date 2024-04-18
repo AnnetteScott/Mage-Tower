@@ -13,6 +13,7 @@ public class Player : Entity
     public float runningSpeed;
     private Rigidbody2D rigidBody;
     private bool onGround = true;
+    private bool jumped = false;
     private float hittingTimer = 0;
     public float hitTimeOut = 0.5f;
     public Animator animator;
@@ -50,6 +51,8 @@ public class Player : Entity
             if (onGround && moveValue.y != 0.0f)
             {
                 onGround = false;
+                jumped = true;
+
                 rigidBody.velocity = new Vector2(moveValue.x * speed, jumpHeight);
             }
             else
@@ -69,7 +72,7 @@ public class Player : Entity
         {
             rigidBody.velocity = new Vector2(0, 0);
         }
-        else
+        else if(jumped)
         {
             rigidBody.velocity = new Vector2(0, rigidBody.velocity.y);
         }
@@ -107,6 +110,15 @@ public class Player : Entity
         if (collision.gameObject.CompareTag("Ground"))
         {
             onGround = true;
+            jumped = false;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            onGround = false;
         }
     }
 }
