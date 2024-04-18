@@ -35,6 +35,9 @@ public class Player : Entity
         attack();
     }
 
+    /// <summary>
+    /// Apply movement to the player
+    /// </summary>
     private void movePlayer()
     {
         float speed = walkingSpeed;
@@ -50,9 +53,7 @@ public class Player : Entity
 
             if (onGround && moveValue.y != 0.0f)
             {
-                onGround = false;
                 jumped = true;
-
                 rigidBody.velocity = new Vector2(moveValue.x * speed, jumpHeight);
             }
             else
@@ -78,6 +79,9 @@ public class Player : Entity
         }
     }
 
+    /// <summary>
+    /// Swing the staff
+    /// </summary>
     private void attack()
     {
         if (mouse.IsPressed() && hittingTimer <= 0)
@@ -86,7 +90,6 @@ public class Player : Entity
             animator.Play("Staff Hit", -1, 0f);
             animator.SetBool("isHitting", true);
             animator.SetBool("isHitting", false);
-            //hit
         }
 
         if (hittingTimer > 0)
@@ -96,6 +99,10 @@ public class Player : Entity
         }
     }
 
+    /// <summary>
+    /// If the staff hits an enemy and the player has swang, do damage to the enemy
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") && hittingTimer > 0.02f)
@@ -105,6 +112,10 @@ public class Player : Entity
         }
     }
 
+    /// <summary>
+    /// Check if the player is on the ground
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -114,6 +125,10 @@ public class Player : Entity
         }
     }
 
+    /// <summary>
+    /// Check if the player is no longer on the ground
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
