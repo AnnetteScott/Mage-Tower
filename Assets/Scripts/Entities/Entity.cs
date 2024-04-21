@@ -75,7 +75,7 @@ public class Entity : MonoBehaviour
     /// </summary>
     public void died()
     {
-        if (gameObject.transform.parent.CompareTag("Enemy"))
+        if (gameObject.transform.parent != null && gameObject.transform.parent.CompareTag("Enemy"))
         {
             Destroy(gameObject.transform.parent.gameObject);
         }
