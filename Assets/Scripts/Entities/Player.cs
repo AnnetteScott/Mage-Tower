@@ -8,9 +8,12 @@ public class Player : Entity
     public InputAction move;
     public InputAction run;
     public InputAction mouse;
+    public Slider manaSlider;
     public float jumpHeight;
     public float walkingSpeed;
     public float runningSpeed;
+    public float maxMana;
+    private float mana;
     private Rigidbody2D rigidBody;
     private bool onGround = true;
     private bool jumped = false;
@@ -26,7 +29,7 @@ public class Player : Entity
         run.Enable();
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.freezeRotation = true;
-
+        mana = maxMana;
     }
 
     void Update()
@@ -97,6 +100,22 @@ public class Player : Entity
             hittingTimer -= Time.deltaTime;
 
         }
+    }
+
+    /// <summary>
+    /// Use mana if the player has enough
+    /// </summary>
+    /// <param name="manaUsed"></param>
+    /// <returns>true if the mana was used, false otherwise</returns>
+    public Boolean useMana(float manaUsed)
+    {
+        if(mana - manaUsed > 0) 
+        {
+            mana -= manaUsed;
+            manaSlider.value = mana / maxMana;
+            return true;
+        }
+        return false;
     }
 
     /// <summary>
