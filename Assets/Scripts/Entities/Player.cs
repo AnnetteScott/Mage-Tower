@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Player : Entity
 {
@@ -107,8 +107,8 @@ public class Player : Entity
     {
         if (collision.gameObject.CompareTag("Enemy") && hittingTimer > 0.02f)
         {
-            GameObject enemy = collision.gameObject;
-            enemy.GetComponent<Enemy>().takeDamage(damage);
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            enemy.takeDamage(damage);
         }
     }
 

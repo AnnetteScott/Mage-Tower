@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : Entity
@@ -7,6 +5,7 @@ public class Enemy : Entity
     public GameObject pointA;
     public GameObject pointB;
     public float speed;
+    public Vector3 offset;
     private float distance;
     private float percentage;
 
@@ -30,6 +29,8 @@ public class Enemy : Entity
             flip();
             swapVectors();
         }
+
+        healthSlider.transform.position = transform.position + offset; 
     }
 
     /// <summary>
