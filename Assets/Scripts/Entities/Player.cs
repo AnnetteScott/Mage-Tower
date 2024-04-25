@@ -9,17 +9,20 @@ public class Player : Entity
     public InputAction run;
     public InputAction mouse;
     public Slider manaSlider;
+    public Animator animator;
+    public Text healthText;
+    public Text manaText;
     public float jumpHeight;
     public float walkingSpeed;
     public float runningSpeed;
     public float maxMana;
+    public float hitTimeOut = 0.5f;
+
     private float mana;
     private Rigidbody2D rigidBody;
     private bool onGround = true;
     private bool jumped = false;
     private float hittingTimer = 0;
-    public float hitTimeOut = 0.5f;
-    public Animator animator;
 
     void Start()
     {
@@ -30,12 +33,14 @@ public class Player : Entity
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.freezeRotation = true;
         mana = maxMana;
+        manaText.text = mana.ToString() + "/" + maxMana;
     }
 
     void Update()
     {
         movePlayer();
         attack();
+        healthText.text = getHealth() + "/" + maxHealth;
     }
 
     /// <summary>
@@ -113,6 +118,7 @@ public class Player : Entity
         {
             mana -= manaUsed;
             manaSlider.value = mana / maxMana;
+            manaText.text = mana.ToString() + "/" + maxMana;
             return true;
         }
         return false;

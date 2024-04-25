@@ -81,6 +81,7 @@ public class Entity : MonoBehaviour
         }
         else
         {
+            gameObject.GetComponent<Player>().healthText.text = "0/" + maxHealth;
             Destroy(gameObject);
         }
     }
