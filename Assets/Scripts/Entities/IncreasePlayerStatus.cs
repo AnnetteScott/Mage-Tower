@@ -2,26 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class IncreasePlayerStatus : MonoBehaviour
 {
-    public float Health = 100;
-    public float Mana = 100;
-
-    private PlayerLevelDeclaration PT;
+    private Entity entity;
 
     void Start()
-    {
-        PT = GetComponent<PlayerLevelDeclaration>(); // Get PlayerLevelDeclaration from the same GameObject
+    {      
+        entity = GetComponent<Entity>();
     }
 
     void Update()
     {
-        PT.AddXP(10); // Example: Simulate gaining 10 XP per frame (you can adjust this)
+        entity.addExperience(10);
 
-        if (PT.PlayerLevel > 1) // Check if the player's level is greater than 1 (to avoid initial level-up on start)
+        if (entity.getLevel() > 1)
         {
-            Health += PT.PlayerLevel / 2f; // Increase health based on player's level
-            Mana += PT.PlayerLevel / 2f; // Increase magic based on player's level
+            entity.maxHealth += entity.getLevel() / 2;
         }
     }
 }
