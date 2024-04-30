@@ -33,6 +33,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2288101469482892456, guid: d9027acf8146f8940b9e94b84a74797a, type: 3}
+      propertyPath: offset.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2288101469482892456, guid: d9027acf8146f8940b9e94b84a74797a, type: 3}
       propertyPath: maxHealth
       value: 5
       objectReference: {fileID: 0}
