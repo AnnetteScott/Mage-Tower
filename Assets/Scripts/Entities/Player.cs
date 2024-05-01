@@ -5,23 +5,25 @@ using UnityEngine.UI;
 
 public class Player : Entity
 {
-    public InputAction move;
-    public InputAction run;
-    public InputAction mouse;
     public Slider manaSlider;
     public Animator animator;
     public Text healthText;
     public Text manaText;
+    public Collider2D feetCollider;
+    public Collider2D bodyCollider;
     public float jumpHeight;
     public float walkingSpeed;
     public float runningSpeed;
     public float maxMana;
     public float hitTimeOut = 0.5f;
+    public InputAction move;
+    public InputAction run;
+    public InputAction mouse;
 
     private float mana;
     private int experience;
     private Rigidbody2D rigidBody;
-    private bool onGround = true;
+    private bool onGround = false;
     private bool hitting = false;
     private float hittingTimer = 0;
 
@@ -37,7 +39,7 @@ public class Player : Entity
         manaText.text = mana.ToString() + "/" + maxMana;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         movePlayer();
         attack();
@@ -183,9 +185,9 @@ public class Player : Entity
     /// Check if the player is on the ground
     /// </summary>
     /// <param name="collision"></param>
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") && feetCollider.IsTouching(collision.collider))
         {
             onGround = true;
         }
