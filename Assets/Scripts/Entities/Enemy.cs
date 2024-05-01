@@ -11,7 +11,7 @@ public class Enemy : Entity
 
     public void Start()
     {
-        init();
+        setHealthToMax();
     }
 
     private void Update()

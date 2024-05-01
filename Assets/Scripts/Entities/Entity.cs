@@ -7,12 +7,11 @@ public class Entity : MonoBehaviour
     public int damage;
     public Slider healthSlider;
     private float health;
-    private int experience;
 
     /// <summary>
     /// 
     /// </summary>
-    public void init()
+    public void setHealthToMax()
     {
         health = maxHealth;
     }
@@ -25,31 +24,6 @@ public class Entity : MonoBehaviour
     public float getHealth()
     {
         return health;
-    }
-
-    /// <summary>
-    /// Calculates the level of the entity
-    /// </summary>
-    /// <returns>int of the entities current level</returns>
-    public int getLevel()
-    {
-        return Mathf.Max(Mathf.FloorToInt(Mathf.Sqrt(this.experience)), 1);
-    }
-
-    /// <summary>
-    /// Add experience to the total
-    /// </summary>
-    /// <param name="experience"></param>
-    public void addExperience(int experience)
-    {
-        int currentLevel = getLevel();
-        this.experience += Mathf.Abs(experience);
-        int newLevel = getLevel();
-
-        if(currentLevel != newLevel)
-        {
-            levelUp();
-        }
     }
 
     /// <summary>
@@ -84,15 +58,5 @@ public class Entity : MonoBehaviour
             gameObject.GetComponent<Player>().healthText.text = "0/" + maxHealth;
             Destroy(gameObject);
         }
-    }
-
-    /// <summary>
-    /// Level up the entity
-    /// </summary>
-    private void levelUp()
-    {
-        this.maxHealth += 20;
-        this.health = maxHealth;
-        //Trigger vfx for leveling up
     }
 }

@@ -19,6 +19,7 @@ public class Player : Entity
     public float hitTimeOut = 0.5f;
 
     private float mana;
+    private int experience;
     private Rigidbody2D rigidBody;
     private bool onGround = true;
     private bool hitting = false;
@@ -26,7 +27,7 @@ public class Player : Entity
 
     void Start()
     {
-        init();
+        setHealthToMax();
         move.Enable();
         mouse.Enable();
         run.Enable();
@@ -130,6 +131,41 @@ public class Player : Entity
     }
 
     /// <summary>
+    /// Calculates the level of the entity
+    /// </summary>
+    /// <returns>int of the entities current level</returns>
+    public int getLevel()
+    {
+        return Mathf.Max(Mathf.FloorToInt(Mathf.Sqrt(this.experience)), 1);
+    }
+
+    /// <summary>
+    /// Add experience to the total
+    /// </summary>
+    /// <param name="experience"></param>
+    public void addExperience(int experience)
+    {
+        int currentLevel = getLevel();
+        this.experience += Mathf.Abs(experience);
+        int newLevel = getLevel();
+
+        if (currentLevel != newLevel)
+        {
+            levelUp();
+        }
+    }
+
+    /// <summary>
+    /// Level up the entity
+    /// </summary>
+    private void levelUp()
+    {
+        this.maxHealth += 20;
+        setHealthToMax();
+        //Trigger vfx for leveling up
+    }
+
+    /// <summary>
     /// If the staff hits an enemy and the player has swang, do damage to the enemy
     /// </summary>
     /// <param name="collision"></param>
@@ -139,7 +175,7 @@ public class Player : Entity
         {
             hitting = false;
             GameObject enemy = collision.gameObject;
-            enemy.GetComponent<Enemy>().takeDamage(damage);
+            float enemyHealth = enemy.GetComponent<Enemy>().takeDamage(damage);
         }
     }
 
