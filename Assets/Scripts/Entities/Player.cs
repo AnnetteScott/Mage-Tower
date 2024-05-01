@@ -21,6 +21,7 @@ public class Player : Entity
     private float mana;
     private Rigidbody2D rigidBody;
     private bool onGround = true;
+    private bool hitting = false;
     private float hittingTimer = 0;
 
     void Start()
@@ -94,6 +95,7 @@ public class Player : Entity
     {
         if (mouse.IsPressed() && hittingTimer <= 0)
         {
+            hitting = true;
             hittingTimer = hitTimeOut;
             animator.Play("Staff Hit", -1, 0f);
             animator.SetBool("isHitting", true);
@@ -103,7 +105,10 @@ public class Player : Entity
         if (hittingTimer > 0)
         {
             hittingTimer -= Time.deltaTime;
-
+        }
+        else
+        {
+            hitting = false;
         }
     }
 
@@ -128,12 +133,13 @@ public class Player : Entity
     /// If the staff hits an enemy and the player has swang, do damage to the enemy
     /// </summary>
     /// <param name="collision"></param>
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") && hittingTimer > 0.02f)
+        if (collision.gameObject.CompareTag("Enemy") && hitting)
         {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            enemy.takeDamage(damage);
+            hitting = false;
+            GameObject enemy = collision.gameObject;
+            enemy.GetComponent<Enemy>().takeDamage(damage);
         }
     }
 
