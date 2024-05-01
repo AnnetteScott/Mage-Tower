@@ -1,11 +1,12 @@
-using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Entity : MonoBehaviour
 {
-    public int maxHealth;
+    public float maxHealth;
     public int damage;
-    private int health;
+    public Slider healthSlider;
+    private float health;
     private int experience;
 
     /// <summary>
@@ -21,7 +22,7 @@ public class Entity : MonoBehaviour
     /// Gets the health of the entity
     /// </summary>
     /// <returns>int of the entities health</returns>
-    public int getHealth()
+    public float getHealth()
     {
         return health;
     }
@@ -56,11 +57,12 @@ public class Entity : MonoBehaviour
     /// </summary>
     /// <param name="damage"></param>
     /// <returns>int of the remaining health</returns>
-    public int takeDamage(int damage)
+    public float takeDamage(int damage)
     {
         health -= Mathf.Abs(damage);
+        healthSlider.value = health / maxHealth;
 
-        if(this.health <= 0)
+        if (this.health <= 0)
         {
             died();
         }
@@ -73,7 +75,15 @@ public class Entity : MonoBehaviour
     /// </summary>
     public void died()
     {
-        Destroy(gameObject);
+        if (gameObject.transform.parent != null && gameObject.transform.parent.CompareTag("Enemy"))
+        {
+            Destroy(gameObject.transform.parent.gameObject);
+        }
+        else
+        {
+            gameObject.GetComponent<Player>().healthText.text = "0/" + maxHealth;
+            Destroy(gameObject);
+        }
     }
 
     /// <summary>

@@ -1,21 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Player : Entity
 {
     public InputAction move;
     public InputAction run;
     public InputAction mouse;
+    public Slider manaSlider;
+    public Animator animator;
+    public Text healthText;
+    public Text manaText;
     public float jumpHeight;
     public float walkingSpeed;
     public float runningSpeed;
+    public float maxMana;
+    public float hitTimeOut = 0.5f;
+
+    private float mana;
     private Rigidbody2D rigidBody;
     private bool onGround = true;
     private float hittingTimer = 0;
-    public float hitTimeOut = 0.5f;
-    public Animator animator;
 
     void Start()
     {
@@ -25,13 +31,15 @@ public class Player : Entity
         run.Enable();
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.freezeRotation = true;
-
+        mana = maxMana;
+        manaText.text = mana.ToString() + "/" + maxMana;
     }
 
     void Update()
     {
         movePlayer();
         attack();
+        healthText.text = getHealth() + "/" + maxHealth;
     }
 
     /// <summary>
@@ -100,6 +108,23 @@ public class Player : Entity
     }
 
     /// <summary>
+    /// Use mana if the player has enough
+    /// </summary>
+    /// <param name="manaUsed"></param>
+    /// <returns>true if the mana was used, false otherwise</returns>
+    public Boolean useMana(float manaUsed)
+    {
+        if(mana - manaUsed > 0) 
+        {
+            mana -= manaUsed;
+            manaSlider.value = mana / maxMana;
+            manaText.text = mana.ToString() + "/" + maxMana;
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
     /// If the staff hits an enemy and the player has swang, do damage to the enemy
     /// </summary>
     /// <param name="collision"></param>
@@ -107,8 +132,8 @@ public class Player : Entity
     {
         if (collision.gameObject.CompareTag("Enemy") && hittingTimer > 0.02f)
         {
-            GameObject enemy = collision.gameObject;
-            enemy.GetComponent<Enemy>().takeDamage(damage);
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            enemy.takeDamage(damage);
         }
     }
 
