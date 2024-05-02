@@ -367,6 +367,8 @@ MonoBehaviour:
   pointA: {fileID: 4008541974374884679}
   pointB: {fileID: 895905289956726858}
   speed: 1
+  hitTimeout: 1.5
+  offset: {x: 0, y: 0, z: 0}
 --- !u!61 &2852480461147354191
 BoxCollider2D:
   m_ObjectHideFlags: 0
