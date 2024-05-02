@@ -11,6 +11,8 @@ public class Player : Entity
     public Text manaText;
     public Collider2D feetCollider;
     public Collider2D bodyCollider;
+    public SpriteRenderer playerSprite;
+    public SpriteRenderer staffSprite;
     public float jumpHeight;
     public float walkingSpeed;
     public float runningSpeed;
@@ -26,6 +28,8 @@ public class Player : Entity
     private bool onGround = false;
     private bool hitting = false;
     private float hittingTimer = 0;
+
+    public bool isFlipped = false;
 
     void Start()
     {
@@ -57,7 +61,6 @@ public class Player : Entity
             speed = runningSpeed;
         }
 
-
         if (move.IsPressed())
         {
             Vector2 moveValue = move.ReadValue<Vector2>();
@@ -72,14 +75,6 @@ public class Player : Entity
                 rigidBody.velocity = new Vector2(moveValue.x * speed, rigidBody.velocity.y);
             }
 
-            //Player mvoing and may be facing a different direction
-            if (moveValue.x != 0.0f) 
-            {
-                Vector3 localScale = transform.localScale;
-                localScale.x = moveValue.x < 0.0f ? -1 : 1;
-                transform.localScale = localScale;
-            }
-            
         }
         else if (onGround)
         {
@@ -122,7 +117,7 @@ public class Player : Entity
     /// <returns>true if the mana was used, false otherwise</returns>
     public Boolean useMana(float manaUsed)
     {
-        if(mana - manaUsed > 0) 
+        if(mana - manaUsed >= 0) 
         {
             mana -= manaUsed;
             manaSlider.value = mana / maxMana;
