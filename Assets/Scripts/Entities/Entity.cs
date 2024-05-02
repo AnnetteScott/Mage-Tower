@@ -1,17 +1,17 @@
-using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Entity : MonoBehaviour
 {
-    public int maxHealth;
+    public float maxHealth;
     public int damage;
-    private int health;
-    private int experience;
+    public Slider healthSlider;
+    private float health;
 
     /// <summary>
     /// 
     /// </summary>
-    public void init()
+    public void setHealthToMax()
     {
         health = maxHealth;
     }
@@ -21,34 +21,9 @@ public class Entity : MonoBehaviour
     /// Gets the health of the entity
     /// </summary>
     /// <returns>int of the entities health</returns>
-    public int getHealth()
+    public float getHealth()
     {
         return health;
-    }
-
-    /// <summary>
-    /// Calculates the level of the entity
-    /// </summary>
-    /// <returns>int of the entities current level</returns>
-    public int getLevel()
-    {
-        return Mathf.Max(Mathf.FloorToInt(Mathf.Sqrt(this.experience)), 1);
-    }
-
-    /// <summary>
-    /// Add experience to the total
-    /// </summary>
-    /// <param name="experience"></param>
-    public void addExperience(int experience)
-    {
-        int currentLevel = getLevel();
-        this.experience += Mathf.Abs(experience);
-        int newLevel = getLevel();
-
-        if(currentLevel != newLevel)
-        {
-            levelUp();
-        }
     }
 
     /// <summary>
@@ -56,11 +31,12 @@ public class Entity : MonoBehaviour
     /// </summary>
     /// <param name="damage"></param>
     /// <returns>int of the remaining health</returns>
-    public int takeDamage(int damage)
+    public float takeDamage(int damage)
     {
         health -= Mathf.Abs(damage);
+        healthSlider.value = health / maxHealth;
 
-        if(this.health <= 0)
+        if (this.health <= 0)
         {
             died();
         }
@@ -73,16 +49,14 @@ public class Entity : MonoBehaviour
     /// </summary>
     public void died()
     {
-        Destroy(gameObject);
-    }
-
-    /// <summary>
-    /// Level up the entity
-    /// </summary>
-    private void levelUp()
-    {
-        this.maxHealth += 20;
-        this.health = maxHealth;
-        //Trigger vfx for leveling up
+        if (gameObject.transform.parent != null && gameObject.transform.parent.CompareTag("Enemy"))
+        {
+            Destroy(gameObject.transform.parent.gameObject);
+        }
+        else
+        {
+            gameObject.GetComponent<Player>().healthText.text = "0/" + maxHealth;
+            Destroy(gameObject);
+        }
     }
 }

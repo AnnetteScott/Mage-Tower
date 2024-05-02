@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: speed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2288101469482892456, guid: d9027acf8146f8940b9e94b84a74797a, type: 3}
+      propertyPath: offset.y
+      value: 1.4
+      objectReference: {fileID: 0}
     - target: {fileID: 2852480461147354191, guid: d9027acf8146f8940b9e94b84a74797a, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
       value: 2.5

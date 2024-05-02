@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : Entity
@@ -7,12 +5,15 @@ public class Enemy : Entity
     public GameObject pointA;
     public GameObject pointB;
     public float speed;
+    public float hitTimeout;
+    public Vector3 offset;
+    private float hitTimer = 0;
     private float distance;
     private float percentage;
 
     public void Start()
     {
-        init();
+        setHealthToMax();
     }
 
     private void Update()
@@ -29,6 +30,13 @@ public class Enemy : Entity
         {
             flip();
             swapVectors();
+        }
+
+        healthSlider.transform.position = transform.position + offset;
+
+        if (hitTimer > 0)
+        {
+            hitTimer -= Time.deltaTime;
         }
     }
 
@@ -64,11 +72,12 @@ public class Enemy : Entity
         Gizmos.DrawLine(pointA.transform.position, pointB.transform.position);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && hitTimer < 0.01f)
         {
             collision.gameObject.GetComponent<Player>().takeDamage(damage);
+            hitTimer = hitTimeout;
         }
     }
 }
