@@ -1,37 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private float moveSpeed = 45f;
-    private Vector3 moveDirection;
-    private Rigidbody2D rb;
+    public float moveSpeed = 20f;
+    private Vector2 endPoint;
+    private Vector2 startPoint;
+    private float distance;
+    private float percentage;
 
     private void Start() {
-        rb = GetComponent<Rigidbody2D>();
+        startPoint = transform.position;
     }
 
-    private void OnCollisionEnter(Collision collision) {
-        Destroy(gameObject);
-    }
-
-    public static float GetAngleFromVectorFloat(Vector3 dir) {
-        dir = dir.normalized;
-        float n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        if(n < 0) n += 360;
-
-        return n;
-    }
-
-    public void Setup(Vector3 shootDir) {
-        moveDirection = shootDir.normalized * moveSpeed;
-        transform.eulerAngles = new Vector3(0, 0, GetAngleFromVectorFloat(shootDir));
-        Destroy(gameObject, 4f);
+    public void Setup(Vector3 end) 
+    {
+        endPoint = end;
     }
         
-    private void Update()
+    private void FixedUpdate()
     {
-        transform.position += moveDirection * Time.deltaTime;
+        distance = Vector2.Distance(startPoint, endPoint);
+        //Distance between the two target points
+        percentage += Time.deltaTime * moveSpeed / distance;
+
+        //Lerp towards the points
+        transform.position = Vector2.Lerp(startPoint, endPoint, percentage);
+
+        //Spell reached the target point
+        if (Vector2.Distance(transform.position, endPoint) < float.Epsilon)
+        {
+            Destroy(gameObject);
+        }
     }
 }
