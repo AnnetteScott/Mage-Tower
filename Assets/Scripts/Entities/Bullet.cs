@@ -8,6 +8,8 @@ public class Bullet : MonoBehaviour
     private float distance;
     private float percentage;
 
+    public int damage = 4;
+
     private void Start() {
         startPoint = transform.position;
     }
@@ -28,6 +30,14 @@ public class Bullet : MonoBehaviour
 
         //Spell reached the target point
         if (Vector2.Distance(transform.position, endPoint) < float.Epsilon)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
         {
             Destroy(gameObject);
         }
