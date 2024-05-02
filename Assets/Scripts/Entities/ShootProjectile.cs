@@ -11,12 +11,6 @@ public class ShootProjectile : MonoBehaviour
 
     private void ShootProjectile_OnShoot(object sender, PlayerAim.OnShootEventArgs e) {
         Transform bulletTranform = Instantiate(MagicBullet, e.endPointPosition, Quaternion.identity);
-        Bullet bullet = bulletTranform.GetComponent<Bullet>();
-
-        if(bullet != null)
-        {
-            Vector3 shootDirection = (e.shootPosition - e.endPointPosition).normalized;
-            bulletTranform.GetComponent<Bullet>().Setup(shootDirection);
-        }
+        bulletTranform.GetComponent<Bullet>().Setup(e.shootDirection);
     }
 } 

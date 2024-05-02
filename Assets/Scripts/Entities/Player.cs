@@ -61,7 +61,6 @@ public class Player : Entity
             speed = runningSpeed;
         }
 
-
         if (move.IsPressed())
         {
             Vector2 moveValue = move.ReadValue<Vector2>();
@@ -76,19 +75,6 @@ public class Player : Entity
                 rigidBody.velocity = new Vector2(moveValue.x * speed, rigidBody.velocity.y);
             }
 
-            //Player moving left and may be facing a different direction
-            if (moveValue.x < 0.0f) 
-            {
-                playerSprite.flipX = true;
-                staffSprite.flipX = true;
-            }
-            else if (moveValue.x > 0.0f)
-            {
-                playerSprite.flipX = false;
-                staffSprite.flipX = false;
-            }
-
-            isFlipped = moveValue.x < 0 ? true : false;
         }
         else if (onGround)
         {

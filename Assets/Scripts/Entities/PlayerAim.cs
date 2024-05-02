@@ -7,31 +7,40 @@ public class PlayerAim : MonoBehaviour
 {
     public Transform aimTransform;
     private Transform aimEndPointTransform;
+    private Transform staffTransform;
 
-    private Vector3 oldMousePositionLeft;
-    private Vector3 oldMousePositionRight;
+    public Vector3 endPointOffset = new Vector3(0.75f, 1f, 0f);
+
     private float initialAngleLeft;
     private float initialAngleRight;
+    private bool cursorBehindPlayer = false;
+    private SpriteRenderer playerRenderer;
+    private SpriteRenderer staffRenderer;
 
     public Player playerScript;
 
     public event EventHandler<OnShootEventArgs> OnShoot;
     public class OnShootEventArgs : EventArgs {
         public Vector3 endPointPosition;
-        public Vector3 shootPosition;
+        public Vector3 shootDirection;
 
     } 
-
-    //These GetMousePosition functions are for obtaining the location of the cursor, and are called in the update function.
-    public static Vector3 GetMousePosition() {
-        Vector3 vec = Input.mousePosition;
-        vec.z = 0f;
-        return vec;
-    }
     
     private void Awake() 
     {        
         aimEndPointTransform = aimTransform.Find("endPointPosition");
+        playerRenderer = GetComponent<SpriteRenderer>();
+        
+        // Find the renderer of the staff
+        staffTransform = aimTransform.Find("Staff");
+        if (staffTransform != null)
+        {
+            staffRenderer = staffTransform.GetComponent<SpriteRenderer>();
+        }
+        else
+        {
+            Debug.LogError("Staff transform not found as a child of Aim!");
+        }
     }
 
     //The Mathf section makes sure the aim angle makes sense in 2D
@@ -40,7 +49,8 @@ public class PlayerAim : MonoBehaviour
         mouseFollow();
     }
 
-    private void mouseFollow() {
+    private void mouseFollow()
+    {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 difference = mousePosition - transform.position;
         difference.Normalize();
@@ -48,43 +58,67 @@ public class PlayerAim : MonoBehaviour
         // Calculate the angle between the player and the mouse position
         float angle = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
 
-        //Player has gone from right to left and not moved mouse
-        if (oldMousePositionRight.Equals(mousePosition) && playerScript.isFlipped)
+        // Flip player based on cursor position
+        if (difference.x >= 0)
         {
-            angle = initialAngleRight * -1;
+            playerRenderer.flipX = false;
+            staffRenderer.flipX = false;
         }
-        //Player has gone from left to right and not moved mouse
-        else if (oldMousePositionLeft.Equals(mousePosition) && !playerScript.isFlipped)
+        else
         {
-            angle = initialAngleLeft;
-        }
-        //Player is facing left and moving mouse
-        else if (playerScript.isFlipped)
-        {
-            angle += 180;
+            playerRenderer.flipX = true;
         }
 
-        //Player is facing left and moving mouse
-        if(playerScript.isFlipped && !oldMousePositionLeft.Equals(mousePosition))
+        // Flip player and staff if the cursor is behind the player and it wasn't already flipped
+        bool newCursorBehindPlayer = (transform.position.x > mousePosition.x && !playerScript.isFlipped) ||
+                                  (transform.position.x < mousePosition.x && playerScript.isFlipped);
+
+        if (newCursorBehindPlayer && !cursorBehindPlayer)
         {
-            initialAngleLeft = angle * -1;
-            oldMousePositionLeft = mousePosition;
+            playerRenderer.flipX = !playerRenderer.flipX;
+            staffRenderer.flipX = !staffRenderer.flipX;
+            cursorBehindPlayer = true;
+        }
+        else if (!newCursorBehindPlayer && cursorBehindPlayer)
+        {
+            cursorBehindPlayer = false;
         }
 
-        //player is facing right and moving mouse
-        if(!playerScript.isFlipped && !oldMousePositionRight.Equals(mousePosition))
+        // Adjust staff rotation based on player flip state
+        float staffAngle = angle;
+        if (playerRenderer.flipX)
         {
-            initialAngleRight = angle;
-            oldMousePositionRight = mousePosition;
+            staffAngle += 180f; // Keep staff upright when player is flipped
+        }
+        aimTransform.eulerAngles = new Vector3(0, 0, staffAngle);
+        UpdateEndPointPosition();
+    }
+
+    private void UpdateEndPointPosition()
+    {
+        // Calculate the direction of the staff based on its rotation
+        Vector3 staffDirection = Vector3.right;
+        if (staffRenderer.flipX)
+        {
+            // If the staff is flipped, adjust the direction accordingly
+            staffDirection = Vector3.left;
         }
 
-        aimTransform.eulerAngles = new Vector3(0, 0, angle);
+        // Calculate the new position of the endPointPosition relative to the staff's position
+        Vector3 newEndPointPosition = staffTransform.position + staffDirection * endPointOffset.x + Vector3.up * endPointOffset.y;
+
+        // Apply the calculated position to the endPointPosition GameObject
+        aimEndPointTransform.position = newEndPointPosition;
     }
 
     private void HandleShooting() {
         if(Input.GetMouseButtonDown(0)) {
+            Vector3 mousePositionA = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 shootDirection = (mousePositionA - aimEndPointTransform.position).normalized;
             OnShoot?.Invoke(this, new OnShootEventArgs {
-                endPointPosition = aimEndPointTransform.position, shootPosition = GetMousePosition(), } );
+                endPointPosition = aimEndPointTransform.position,
+                shootDirection = shootDirection, // Passing the normalized shoot direction
+            });
         }
     }
 }
