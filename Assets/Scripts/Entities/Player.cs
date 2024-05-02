@@ -18,6 +18,8 @@ public class Player : Entity
     public float hitTimeOut = 0.5f;
     public Animator animator;
 
+    public bool isFlipped = false;
+
     void Start()
     {
         init();
@@ -66,6 +68,7 @@ public class Player : Entity
                 Vector3 localScale = transform.localScale;
                 localScale.x = moveValue.x < 0.0f ? -1 : 1;
                 transform.localScale = localScale;
+                isFlipped = !isFlipped;
             }
 
         }
