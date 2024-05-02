@@ -6,9 +6,12 @@ using UnityEngine.UI;
 public class Player : Entity
 {
     public Slider manaSlider;
+    public Slider xpSlider;
     public Animator animator;
     public Text healthText;
     public Text manaText;
+    public Text xpText;
+    public Text levelText;
     public Collider2D feetCollider;
     public Collider2D bodyCollider;
     public float jumpHeight;
