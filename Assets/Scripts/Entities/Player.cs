@@ -11,6 +11,8 @@ public class Player : Entity
     public Text manaText;
     public Collider2D feetCollider;
     public Collider2D bodyCollider;
+    public SpriteRenderer playerSprite;
+    public SpriteRenderer staffSprite;
     public float jumpHeight;
     public float walkingSpeed;
     public float runningSpeed;
@@ -74,15 +76,19 @@ public class Player : Entity
                 rigidBody.velocity = new Vector2(moveValue.x * speed, rigidBody.velocity.y);
             }
 
-            //Player mvoing and may be facing a different direction
-            if (moveValue.x != 0.0f) 
+            //Player moving left and may be facing a different direction
+            if (moveValue.x < 0.0f) 
             {
-                Vector3 localScale = transform.localScale;
-                localScale.x = moveValue.x < 0.0f ? -1 : 1;
-                transform.localScale = localScale;
-                isFlipped = !isFlipped;
+                playerSprite.flipX = true;
+                staffSprite.flipX = true;
             }
-            
+            else if (moveValue.x > 0.0f)
+            {
+                playerSprite.flipX = false;
+                staffSprite.flipX = false;
+            }
+
+            isFlipped = moveValue.x < 0 ? true : false;
         }
         else if (onGround)
         {

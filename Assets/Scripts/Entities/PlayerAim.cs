@@ -3,15 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAIm : Entity
+public class PlayerAim : MonoBehaviour
 {
-    private Transform aimTransform;
+    public Transform aimTransform;
     private Transform aimEndPointTransform;
-    private Transform staffTransform;
-    private SpriteRenderer playerRenderer;
-    private SpriteRenderer staffRenderer;
 
-    private Player playerScript;
+    private Vector3 oldMousePositionLeft;
+    private Vector3 oldMousePositionRight;
+    private float initialAngleLeft;
+    private float initialAngleRight;
+
+    public Player playerScript;
 
     public event EventHandler<OnShootEventArgs> OnShoot;
     public class OnShootEventArgs : EventArgs {
@@ -27,40 +29,14 @@ public class PlayerAIm : Entity
         return vec;
     }
     
-    private void Awake() {
-        aimTransform = transform.Find("Aim");
-        staffTransform = transform.Find("Staff");
-        playerRenderer = GetComponent<SpriteRenderer>();
-
-        if (aimTransform != null)
-        {
-            staffTransform = aimTransform.Find("Staff");
-
-            if (staffTransform != null)
-            {
-                staffRenderer = staffTransform.GetComponent<SpriteRenderer>();
-            }
-            else
-            {
-                Debug.Log("Staff transform not found as a child of Aim!");
-            }
-        }
-        else
-        {
-            Debug.Log("Aim transform not found!");
-        }
-        
+    private void Awake() 
+    {        
         aimEndPointTransform = aimTransform.Find("endPointPosition");
     }
 
     //The Mathf section makes sure the aim angle makes sense in 2D
     private void Update() {
         HandleShooting();
-        Vector3 mousePositionA = GetMousePosition();
-        Vector3 aimDirection = (mousePositionA - transform.position).normalized;
-        float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-        aimTransform.eulerAngles = new Vector3(0, 0, angle);
-
         mouseFollow();
     }
 
@@ -72,25 +48,37 @@ public class PlayerAIm : Entity
         // Calculate the angle between the player and the mouse position
         float angle = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
 
-        // Adjust the angle based on player flip state
-        if (playerScript != null && playerScript.isFlipped)
+        //Player has gone from right to left and not moved mouse
+        if (oldMousePositionRight.Equals(mousePosition) && playerScript.isFlipped)
         {
-            angle = 180 - angle;
+            angle = initialAngleRight * -1;
+        }
+        //Player has gone from left to right and not moved mouse
+        else if (oldMousePositionLeft.Equals(mousePosition) && !playerScript.isFlipped)
+        {
+            angle = initialAngleLeft;
+        }
+        //Player is facing left and moving mouse
+        else if (playerScript.isFlipped)
+        {
+            angle += 180;
         }
 
-        // Set the rotation of the aim object
+        //Player is facing left and moving mouse
+        if(playerScript.isFlipped && !oldMousePositionLeft.Equals(mousePosition))
+        {
+            initialAngleLeft = angle * -1;
+            oldMousePositionLeft = mousePosition;
+        }
+
+        //player is facing right and moving mouse
+        if(!playerScript.isFlipped && !oldMousePositionRight.Equals(mousePosition))
+        {
+            initialAngleRight = angle;
+            oldMousePositionRight = mousePosition;
+        }
+
         aimTransform.eulerAngles = new Vector3(0, 0, angle);
-
-        // Set the rotation of the staff object
-        if (staffTransform != null)
-        {
-            // Adjust staff rotation to face the same direction as aim, but flipped if necessary
-            staffTransform.rotation = Quaternion.Euler(0, 0, angle);
-            if (playerScript != null && playerScript.isFlipped)
-            {
-                staffTransform.Rotate(0, 180, 0);
-            }
-        }
     }
 
     private void HandleShooting() {
