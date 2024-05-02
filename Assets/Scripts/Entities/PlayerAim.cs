@@ -112,7 +112,7 @@ public class PlayerAim : MonoBehaviour
     }
 
     private void HandleShooting() {
-        if(Input.GetMouseButtonDown(0)) {
+        if(Input.GetMouseButtonDown(1) && playerScript.useMana(2)) {
             Vector3 mousePositionA = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             OnShoot?.Invoke(this, new OnShootEventArgs {
                 endPointPosition = aimEndPointTransform.position,

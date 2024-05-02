@@ -117,7 +117,7 @@ public class Player : Entity
     /// <returns>true if the mana was used, false otherwise</returns>
     public Boolean useMana(float manaUsed)
     {
-        if(mana - manaUsed > 0) 
+        if(mana - manaUsed >= 0) 
         {
             mana -= manaUsed;
             manaSlider.value = mana / maxMana;
