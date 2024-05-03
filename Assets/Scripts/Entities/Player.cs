@@ -19,6 +19,7 @@ public class Player : Entity
     public float maxMana;
     public float hitTimeOut = 0.5f;
     public InputAction move;
+    public InputAction dash;
     public InputAction run;
     public InputAction mouse;
 
@@ -28,6 +29,11 @@ public class Player : Entity
     private bool onGround = false;
     private bool hitting = false;
     private float hittingTimer = 0;
+    private float dashingTimer = 0;
+    private float dashingTimeout = 0.2f;
+    private float dashingSpeed = 40f;
+    private float dashingManaUse = 3;
+
 
     public bool isFlipped = false;
 
@@ -37,6 +43,7 @@ public class Player : Entity
         move.Enable();
         mouse.Enable();
         run.Enable();
+        dash.Enable();
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.freezeRotation = true;
         mana = maxMana;
@@ -61,7 +68,17 @@ public class Player : Entity
             speed = runningSpeed;
         }
 
-        if (move.IsPressed())
+        if (dash.IsPressed() && dashingTimer == 0 && mana > dashingManaUse)
+        {
+            dashingTimer = dashingTimeout;
+            rigidBody.velocity = new Vector2(isFlipped ? -dashingSpeed : dashingSpeed, 0);
+            useMana(dashingManaUse);
+        }
+        else if(dashingTimer > 0)
+        {
+            rigidBody.velocity = new Vector2(isFlipped ? -dashingSpeed : dashingSpeed, 0);
+        }
+        else if (move.IsPressed())
         {
             Vector2 moveValue = move.ReadValue<Vector2>();
 
@@ -83,6 +100,15 @@ public class Player : Entity
         else
         {
             rigidBody.velocity = new Vector2(0, rigidBody.velocity.y);
+        }
+
+        if(dashingTimer > 0)
+        {
+            dashingTimer -= Time.deltaTime;
+        }
+        else
+        {
+            dashingTimer = 0;
         }
     }
 
