@@ -153,6 +153,11 @@ public class Player : Entity
         int currentLevel = getLevel();
         this.experience += Mathf.Abs(experience);
         int newLevel = getLevel();
+        levelText.text = getLevel().ToString();
+
+        float xpneeded = Mathf.Pow(getLevel() + 1, 2);
+        xpText.text = experience.ToString() + "/" + xpneeded;
+        xpSlider.value = experience / xpneeded;
 
         if (currentLevel != newLevel)
         {
@@ -165,9 +170,10 @@ public class Player : Entity
     /// </summary>
     private void levelUp()
     {
-        this.maxHealth += 20;
+        this.maxHealth += 5;
         setHealthToMax();
-        //Trigger vfx for leveling up
+        this.maxMana += 5;
+        mana = maxMana;
     }
 
     /// <summary>
@@ -181,6 +187,10 @@ public class Player : Entity
             hitting = false;
             GameObject enemy = collision.gameObject;
             float enemyHealth = enemy.GetComponent<Enemy>().takeDamage(damage);
+            if(enemyHealth <= 0)
+            {
+                addExperience(3);
+            }
         }
     }
 
@@ -207,4 +217,6 @@ public class Player : Entity
             onGround = false;
         }
     }
+
+
 }
