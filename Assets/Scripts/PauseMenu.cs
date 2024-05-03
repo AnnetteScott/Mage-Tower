@@ -41,5 +41,7 @@ public class PauseMenu : MonoBehaviour
     {
         //Need to add "Game" scene to build settings in unity after the 'MainMenu' for this to function, waiting on game creation
         SceneManager.LoadScene(0);
+        GameIsPaused = false;
+        time.timeScale = 1f;
     }
 }
