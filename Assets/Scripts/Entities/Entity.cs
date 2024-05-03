@@ -17,6 +17,16 @@ public class Entity : MonoBehaviour
     }
 
 
+    public void addHealth(float health)
+    {
+        health += Mathf.Abs(health);
+        if(health > maxHealth) 
+        { 
+            health = maxHealth;
+        }
+
+    }
+
     /// <summary>
     /// Gets the health of the entity
     /// </summary>
@@ -51,6 +61,11 @@ public class Entity : MonoBehaviour
     {
         if (gameObject.transform.parent != null && gameObject.transform.parent.CompareTag("Enemy"))
         {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            if(players.Length > 0)
+            {
+                players[0].GetComponent<Player>().killedEnemy(); ;
+            }
             Destroy(gameObject.transform.parent.gameObject);
         }
         else
