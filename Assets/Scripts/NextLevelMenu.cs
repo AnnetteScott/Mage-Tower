@@ -16,6 +16,12 @@ public class LevelMenu : MonoBehaviour
  
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            if (players.Length > 0)
+            {
+                players[0].GetComponent<Player>().addExperience(2); ;
+            }
+
             Next();
         }
     }
