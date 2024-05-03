@@ -50,14 +50,14 @@ public class Player : Entity
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.freezeRotation = true;
         mana = maxMana;
-        manaText.text = mana.ToString() + "/" + maxMana;
+        updateGUI();
     }
 
     void FixedUpdate()
     {
         movePlayer();
         attack();
-        healthText.text = getHealth() + "/" + maxHealth;
+        updateGUI();
     }
 
     /// <summary>
@@ -149,8 +149,6 @@ public class Player : Entity
         if(mana - manaUsed >= 0) 
         {
             mana -= manaUsed;
-            manaSlider.value = mana / maxMana;
-            manaText.text = mana.ToString() + "/" + maxMana;
             return true;
         }
         return false;
@@ -179,11 +177,6 @@ public class Player : Entity
         {
             levelUp();
         }
-
-        levelText.text = getLevel().ToString();
-        float xpneeded = Mathf.Pow(getLevel() + 1, 2);
-        xpText.text = experience.ToString() + "/" + xpneeded;
-        xpSlider.value = experience / xpneeded;
     }
 
     /// <summary>
@@ -191,10 +184,37 @@ public class Player : Entity
     /// </summary>
     private void levelUp()
     {
-        this.maxHealth += 5;
+        this.maxHealth += 2;
         setHealthToMax();
-        this.maxMana += 5;
+        this.maxMana += 2;
         mana = maxMana;
+    }
+
+    public void updateGUI()
+    {
+        levelText.text = getLevel().ToString();
+        float xpneeded = Mathf.Pow(getLevel() + 1, 2);
+        xpText.text = experience.ToString() + "/" + xpneeded;
+        xpSlider.value = experience / xpneeded;
+
+        manaSlider.value = mana / maxMana;
+        manaText.text = mana.ToString() + "/" + maxMana;
+
+        healthText.text = getHealth() + "/" + maxHealth;
+        healthSlider.value = getHealth() / maxHealth;
+    }
+
+    public void killedEnemy()
+    {
+        addExperience(3);
+        addHealth(2);
+        mana += 2;
+        if(mana > maxMana)
+        {
+            mana = maxMana;
+        }
+
+        updateGUI();
     }
 
     /// <summary>
@@ -207,11 +227,7 @@ public class Player : Entity
         {
             hitting = false;
             GameObject enemy = collision.gameObject;
-            float enemyHealth = enemy.GetComponent<Enemy>().takeDamage(damage);
-            if (enemyHealth <= 0)
-            {
-                addExperience(3);
-            }
+            enemy.GetComponent<Enemy>().takeDamage(damage);
         }
     }
 
