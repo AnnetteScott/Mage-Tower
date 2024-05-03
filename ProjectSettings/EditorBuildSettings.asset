@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 7c6b1dfbf661a5b4c9f5409a777afa7b
   - enabled: 1
-    path: Assets/Scenes/Levels/Temp_LevelOne.unity
+    path: Assets/Scenes/Levels/Temp_Level1.unity
     guid: f04cad37a9187864980daf958148cd5f
   - enabled: 1
-    path: Assets/Scenes/Levels/Temp_LevelTwo.unity
+    path: Assets/Scenes/Levels/Temp_Level2.unity
     guid: 2f292837fe8eca449b4172bee6447d93
   m_configObjects: {}
