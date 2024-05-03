@@ -6,12 +6,9 @@ using UnityEngine.UI;
 public class Player : Entity
 {
     public Slider manaSlider;
-    public Slider xpSlider;
     public Animator animator;
     public Text healthText;
     public Text manaText;
-    public Text xpText;
-    public Text levelText;
     public Collider2D feetCollider;
     public Collider2D bodyCollider;
     public SpriteRenderer playerSprite;
@@ -174,11 +171,6 @@ public class Player : Entity
         int currentLevel = getLevel();
         this.experience += Mathf.Abs(experience);
         int newLevel = getLevel();
-        levelText.text = getLevel().ToString();
-
-        float xpneeded = Mathf.Pow(getLevel() + 1, 2);
-        xpText.text = experience.ToString() + "/" + xpneeded;
-        xpSlider.value = experience / xpneeded;
 
         if (currentLevel != newLevel)
         {
@@ -191,10 +183,9 @@ public class Player : Entity
     /// </summary>
     private void levelUp()
     {
-        this.maxHealth += 5;
+        this.maxHealth += 20;
         setHealthToMax();
-        this.maxMana += 5;
-        mana = maxMana;
+        //Trigger vfx for leveling up
     }
 
     /// <summary>
@@ -208,10 +199,6 @@ public class Player : Entity
             hitting = false;
             GameObject enemy = collision.gameObject;
             float enemyHealth = enemy.GetComponent<Enemy>().takeDamage(damage);
-            if(enemyHealth <= 0)
-            {
-                addExperience(3);
-            }
         }
     }
 
@@ -238,6 +225,4 @@ public class Player : Entity
             onGround = false;
         }
     }
-
-
 }
