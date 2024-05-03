@@ -9,16 +9,23 @@ public class LevelMenu : MonoBehaviour
     public static bool LevelIsNext = false;
     public GameObject levelMenuUI;
 
+    private bool addXP = false;
+
     // Update is called once per frame
     void Update () {
  
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
-            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-            if (players.Length > 0)
+            if (!addXP)
             {
-                players[0].GetComponent<Player>().addExperience(2); ;
+                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                if (players.Length > 0)
+                {
+                    players[0].GetComponent<Player>().addExperience(2); ;
+                }
+                addXP = true;
             }
+            
 
             Next();
         }
