@@ -10,7 +10,7 @@ public class LevelMenu : MonoBehaviour
     public GameObject levelMenuUI;
 
     // Update is called once per frame
-    void UpdateNext () {
+    void Update () {
  
         Debug.Log(GameObject.FindGameObjectsWithTag("Enemy").Length);
  
