@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Temp_Level2.unity
     guid: 2f292837fe8eca449b4172bee6447d93
+  - enabled: 1
+    path: Assets/Scenes/Levels/Temp_Level3.unity
+    guid: 555cf85848deb8143b186d08959bbd18
+  - enabled: 1
+    path: Assets/Scenes/Levels/Temp_Level4.unity
+    guid: 04456842dba013c41b30d2d2bbf5fc01
+  - enabled: 1
+    path: Assets/Scenes/Levels/Temp_Level5.unity
+    guid: 536fde9c875610f4db00624e6fa4efdb
   m_configObjects: {}
