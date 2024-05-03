@@ -12,8 +12,6 @@ public class LevelMenu : MonoBehaviour
     // Update is called once per frame
     void Update () {
  
-        Debug.Log(GameObject.FindGameObjectsWithTag("Enemy").Length);
- 
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -29,14 +27,12 @@ public class LevelMenu : MonoBehaviour
     void Next ()
     {
         levelMenuUI.SetActive(true);
-        Time.timeScale = 0f;
         LevelIsNext = true;
     }
 
     public void NextLevelButton ()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        Time.timeScale = 1f;
         LevelIsNext = false;
     }
 
@@ -44,6 +40,5 @@ public class LevelMenu : MonoBehaviour
     {
         SceneManager.LoadScene(0);
         LevelIsNext = false;
-        Time.timeScale = 1f;
     }
 }

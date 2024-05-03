@@ -11,6 +11,8 @@ public class RespawnMenu : MonoBehaviour
 
     // Update is called once per frame
     void Update () {
+
+        Debug.Log(Time.timeScale);
  
         if (GameObject.FindGameObjectsWithTag("Player").Length == 0)
         {
@@ -22,13 +24,11 @@ public class RespawnMenu : MonoBehaviour
     {
         respawnMenuUI.SetActive(true);
         PlayerIsDead = true;
-        Time.timeScale = 0f;
     }
 
     public void RespawnButton ()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Time.timeScale = 1f;
         PlayerIsDead = false;
     }
 
@@ -36,6 +36,5 @@ public class RespawnMenu : MonoBehaviour
     {
         SceneManager.LoadScene(0);
         PlayerIsDead = false;
-        Time.timeScale = 1f;
     }
 }
