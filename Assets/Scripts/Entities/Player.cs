@@ -35,8 +35,8 @@ public class Player : Entity
     private float dashingTimer = 0;
     private float dashingTimeout = 1f;
     private float dashingTimelimit = 0.1f;
-    private float dashingSpeed = 40f;
-    private float dashingManaUse = 3;
+    private float dashingSpeed = 20f;
+    private float dashingManaUse = 2;
     private bool isDashingRight = true;
 
     public bool isFlipped = false;
