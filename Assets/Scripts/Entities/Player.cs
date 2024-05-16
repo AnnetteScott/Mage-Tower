@@ -43,6 +43,17 @@ public class Player : Entity
 
     void Start()
     {
+        if(GlobalData.playerMaxHealth == 0)
+        {
+            GlobalData.playerMaxHealth = maxHealth;
+            GlobalData.playerMaxMana = maxMana;
+            GlobalData.playerXP = 0;
+        }
+
+        maxHealth = GlobalData.playerMaxHealth;
+        maxMana = GlobalData.playerMaxMana;
+        experience = GlobalData.playerXP;
+
         setHealthToMax();
         move.Enable();
         mouse.Enable();
@@ -190,6 +201,11 @@ public class Player : Entity
         setHealthToMax();
         this.maxMana += 2;
         mana = maxMana;
+    }
+
+    public int getExperience()
+    {
+        return this.experience;
     }
 
     public void updateGUI()
