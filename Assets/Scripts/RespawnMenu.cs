@@ -11,8 +11,6 @@ public class RespawnMenu : MonoBehaviour
 
     // Update is called once per frame
     void Update () {
-
-        Debug.Log(Time.timeScale);
  
         if (GameObject.FindGameObjectsWithTag("Player").Length == 0)
         {
