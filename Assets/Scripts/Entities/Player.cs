@@ -41,6 +41,8 @@ public class Player : Entity
 
     public bool isFlipped = false;
 
+    AudioManager audioManager;
+
     void Start()
     {
         setHealthToMax();
@@ -190,6 +192,7 @@ public class Player : Entity
         setHealthToMax();
         this.maxMana += 2;
         mana = maxMana;
+        audioManager.PlaySFX(audioManager.levelUp);
     }
 
     public void updateGUI()
@@ -255,5 +258,10 @@ public class Player : Entity
         {
             onGround = false;
         }
+    }
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 }
