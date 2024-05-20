@@ -219,6 +219,16 @@ public class Player : Entity
         updateGUI();
     }
 
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            GlobalData.inventory.Add(collision.gameObject.name.Replace("(Clone)", ""));
+            Destroy(collision.gameObject);
+        }
+    }
+
     /// <summary>
     /// If the staff hits an enemy and the player has swang, do damage to the enemy
     /// </summary>
