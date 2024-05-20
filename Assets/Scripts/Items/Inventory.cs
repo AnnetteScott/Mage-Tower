@@ -38,10 +38,20 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
             }
         }
 
+        if (staffSlot.transform.childCount > 0)
+        {
+            Destroy(staffSlot.transform.GetChild(0).gameObject);
+        }
+
+        if (amourSlot.transform.childCount > 0)
+        {
+            Destroy(amourSlot.transform.GetChild(0).gameObject);
+        }
+
+
         int index = 0;
         foreach (string name in GlobalData.inventory)
         {
-            Debug.Log(name);
             var resource = Resources.Load(name);
             GameObject newInstance = Instantiate(resource) as GameObject;
             Transform nextSlot = InventorySlots.transform.GetChild(index);
@@ -54,6 +64,13 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
             var resource = Resources.Load(GlobalData.equippedStaffItem);
             GameObject newInstance = Instantiate(resource) as GameObject;
             newInstance.transform.SetParent(staffSlot.transform);
+        }
+
+        if(GlobalData.equippedArmourItem != null)
+        {
+            var resource = Resources.Load(GlobalData.equippedArmourItem);
+            GameObject newInstance = Instantiate(resource) as GameObject;
+            newInstance.transform.SetParent(amourSlot.transform);
         }
     }
 
@@ -74,6 +91,7 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
         }
 
         string name = clickedItem.name.Replace("(Clone)", "");
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         if(clickedItem.GetComponent<Weapon>() != null)
         {
             if(staffSlot.transform.childCount > 0)
@@ -82,6 +100,25 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
                 staffSlot.transform.GetChild(0).gameObject.transform.SetParent(nextSlot);
             }
             GlobalData.equippedStaffItem = name;
+            if (players.Length > 0)
+            {
+                players[0].GetComponent<Player>().power = clickedItem.GetComponent<Weapon>().power;
+            }
+
+        }
+        else if(clickedItem.GetComponent<Armour>() != null)
+        {
+            if(amourSlot.transform.childCount > 0)
+            {
+                Transform nextSlot = InventorySlots.transform.GetChild(GlobalData.inventory.Count);
+                amourSlot.transform.GetChild(0).gameObject.transform.SetParent(nextSlot);
+            }
+            GlobalData.equippedArmourItem = name;
+
+            if (players.Length > 0)
+            {
+                players[0].GetComponent<Player>().armour = clickedItem.GetComponent<Armour>().armour;
+            }
         }
 
 
@@ -93,14 +130,27 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
 
     public void unequip()
     {
-        if (clickedItem.CompareTag("Item"))
+        Transform nextSlot = InventorySlots.transform.GetChild(GlobalData.inventory.Count);
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        clickedItem.transform.SetParent(nextSlot);
+        GlobalData.inventory.Add(clickedItem.name.Replace("(Clone)", ""));
+        if (clickedItem.GetComponent<Weapon>() != null)
         {
-            Transform nextSlot = InventorySlots.transform.GetChild(GlobalData.inventory.Count);
-            clickedItem.transform.SetParent(nextSlot);
-            GlobalData.inventory.Add(clickedItem.name.Replace("(Clone)", ""));
             GlobalData.equippedStaffItem = null;
-            displayInventoryItems();
+            if (players.Length > 0)
+            {
+                players[0].GetComponent<Player>().power = 0;
+            }
         }
+        else if (clickedItem.GetComponent<Armour>() != null)
+        {
+            GlobalData.equippedArmourItem = null;
+            if (players.Length > 0)
+            {
+                players[0].GetComponent<Player>().armour = 0;
+            }
+        }
+        displayInventoryItems();
 
     }
 
