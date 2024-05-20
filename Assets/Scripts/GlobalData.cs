@@ -8,6 +8,7 @@ public static class GlobalData
     public static float playerMaxHealth;
     public static int playerXP;
     public static float cameraZoom = 5;
-    public static GameObject equippedStaffItem;
-    public static GameObject equippedAmourItem;
+    public static string equippedStaffItem;
+    public static string equippedAmourItem;
+    public static ArrayList inventory = new ArrayList();
 }

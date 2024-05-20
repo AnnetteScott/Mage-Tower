@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3003746567153270506}
   m_Layer: 5
   m_Name: StaffCrystal
-  m_TagString: Weapon Modifier
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Weapon
   - Projectile
+  - Weapon Modifier
   layers:
   - Default
   - TransparentFX
