@@ -9,6 +9,8 @@ public static class GlobalData
     public static int playerXP;
     public static float cameraZoom = 5;
     public static string equippedStaffItem;
-    public static string equippedAmourItem;
+    public static string equippedArmourItem;
+    public static float playerPower = 1;
+    public static float playerArmour;
     public static ArrayList inventory = new ArrayList();
 }

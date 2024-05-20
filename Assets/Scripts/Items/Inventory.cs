@@ -99,10 +99,14 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
                 Transform nextSlot = InventorySlots.transform.GetChild(GlobalData.inventory.Count);
                 staffSlot.transform.GetChild(0).gameObject.transform.SetParent(nextSlot);
             }
+
+            float power = clickedItem.GetComponent<Weapon>().power;
             GlobalData.equippedStaffItem = name;
+            GlobalData.playerPower = power;
+
             if (players.Length > 0)
             {
-                players[0].GetComponent<Player>().power = clickedItem.GetComponent<Weapon>().power;
+                players[0].GetComponent<Player>().power = power;
             }
 
         }
@@ -113,11 +117,14 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
                 Transform nextSlot = InventorySlots.transform.GetChild(GlobalData.inventory.Count);
                 amourSlot.transform.GetChild(0).gameObject.transform.SetParent(nextSlot);
             }
+
+            float armour = clickedItem.GetComponent<Armour>().armour;
             GlobalData.equippedArmourItem = name;
+            GlobalData.playerArmour = armour;
 
             if (players.Length > 0)
             {
-                players[0].GetComponent<Player>().armour = clickedItem.GetComponent<Armour>().armour;
+                players[0].GetComponent<Player>().armour = armour;
             }
         }
 

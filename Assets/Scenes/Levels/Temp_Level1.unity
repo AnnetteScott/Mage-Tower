@@ -1504,6 +1504,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3536560737762191092, guid: 17c7d3d1f36edbf4cbed6e8a32103900, type: 3}
+      propertyPath: drop
+      value: 
+      objectReference: {fileID: 235050841993030039, guid: 5235f8cd369a3004e8572b555f1ad8ef, type: 3}
     - target: {fileID: 5875994407429177472, guid: 17c7d3d1f36edbf4cbed6e8a32103900, type: 3}
       propertyPath: m_Name
       value: Bat Variant

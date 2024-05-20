@@ -52,6 +52,9 @@ public class Player : Entity
         rigidBody.freezeRotation = true;
         mana = maxMana;
         updateGUI();
+
+        power = GlobalData.playerPower;
+        armour = GlobalData.playerArmour;
     }
 
     void FixedUpdate()

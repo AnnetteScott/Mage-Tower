@@ -39,12 +39,11 @@ public class Bullet : MonoBehaviour
     {
         float damageModifier = 1;
 
-        if (GlobalData.equippedStaffItem != null)
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        if (players.Length > 0)
         {
-            var resource = Resources.Load(GlobalData.equippedStaffItem);
-            GameObject newInstance = Instantiate(resource) as GameObject;
-            damageModifier = newInstance.GetComponent<Weapon>().power;
-            Destroy(newInstance);
+            damageModifier = players[0].GetComponent<Player>().power;
+            Debug.Log(damageModifier);
         }
 
         return damage * damageModifier;

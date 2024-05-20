@@ -5,7 +5,8 @@ public class Entity : MonoBehaviour
 {
     public float maxHealth;
     public int damage;
-    public float amour;
+    public float armour;
+    public float power;
     public Slider healthSlider;
     public GameObject drop;
     private float health;
@@ -46,7 +47,7 @@ public class Entity : MonoBehaviour
     /// <returns>int of the remaining health</returns>
     public float takeDamage(float damage)
     {
-        float damageDone = damage - amour;
+        float damageDone = damage - armour;
         if(damageDone > 0)
         {
             health -= Mathf.Abs(damageDone);
