@@ -43,7 +43,6 @@ public class Bullet : MonoBehaviour
         if (players.Length > 0)
         {
             damageModifier = players[0].GetComponent<Player>().power;
-            Debug.Log(damageModifier);
         }
 
         return damage * damageModifier;

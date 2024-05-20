@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour, IPointerDownHandler
 {
@@ -19,6 +20,7 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
             if (GameIsPaused)
             {
                 Resume();
+                clickedItem = null;
             }
             else
             {
@@ -48,6 +50,8 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
             Destroy(amourSlot.transform.GetChild(0).gameObject);
         }
 
+        staffSlot.gameObject.GetComponent<Image>().color = Color.white;
+        amourSlot.gameObject.GetComponent<Image>().color = Color.white;
 
         int index = 0;
         foreach (string name in GlobalData.inventory)
@@ -76,10 +80,18 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if(clickedItem != null)
+        {
+            Image slotImage = clickedItem.transform.parent.gameObject.GetComponent<Image>();
+            slotImage.color = Color.white;
+        }
+
         GameObject gameObject = eventData.pointerCurrentRaycast.gameObject;
         if(gameObject.CompareTag("Item"))
         {
             clickedItem = gameObject;
+            Image slotImage = clickedItem.transform.parent.gameObject.GetComponent<Image>();
+            slotImage.color = Color.cyan;
         }
     }
 
@@ -131,12 +143,19 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
 
         GlobalData.inventory.Remove(name);
         displayInventoryItems();
+        Image slotImage = clickedItem.transform.parent.gameObject.GetComponent<Image>();
+        slotImage.color = Color.white;
         clickedItem = null;
 
     }
 
     public void unequip()
     {
+        if (!clickedItem)
+        {
+            return;
+        }
+
         Transform nextSlot = InventorySlots.transform.GetChild(GlobalData.inventory.Count);
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         clickedItem.transform.SetParent(nextSlot);
@@ -157,8 +176,10 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
                 players[0].GetComponent<Player>().armour = 0;
             }
         }
+        Image slotImage = clickedItem.transform.parent.gameObject.GetComponent<Image>();
+        slotImage.color = Color.white;
         displayInventoryItems();
-
+        clickedItem = null;
     }
 
     public void Resume()
