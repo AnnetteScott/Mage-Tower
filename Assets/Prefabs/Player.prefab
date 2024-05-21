@@ -733,7 +733,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5766324017602671807}
-  - component: {fileID: 3504474804193183268}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -758,74 +757,6 @@ Transform:
   - {fileID: 5903653372232026523}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3504474804193183268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2916339238190545429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8fefad273167a2488f7fe8af84cc2fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 0
-  damage: 0
-  healthSlider: {fileID: 0}
-  manaSlider: {fileID: 0}
-  xpSlider: {fileID: 0}
-  animator: {fileID: 0}
-  healthText: {fileID: 0}
-  manaText: {fileID: 0}
-  xpText: {fileID: 0}
-  levelText: {fileID: 0}
-  feetCollider: {fileID: 0}
-  bodyCollider: {fileID: 0}
-  playerSprite: {fileID: 0}
-  jumpHeight: 0
-  walkingSpeed: 0
-  runningSpeed: 0
-  maxMana: 0
-  hitTimeOut: 0.5
-  move:
-    m_Name: Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 1ca02c4e-aacf-485d-964e-858758304e49
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  dash:
-    m_Name: Dash
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: e4a810f7-e454-479f-beb4-3405ba1cf541
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  run:
-    m_Name: Run
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: fa7ff991-abe7-4e61-9d43-9a55264d2cfe
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  mouse:
-    m_Name: Mouse
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 6f281e6a-a323-475c-b0a2-c5221785d247
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  PopUpLevelUpPrefeb: {fileID: 2336303339269453966, guid: f93771efeaea94122934bf78bc91baca, type: 3}
-  isFlipped: 0
 --- !u!1 &3732898160644908100
 GameObject:
   m_ObjectHideFlags: 0
@@ -1203,7 +1134,7 @@ MonoBehaviour:
       m_Action: Mouse
       m_Flags: 0
     m_Flags: 0
-  PopUpLevelUpPrefeb: {fileID: 0}
+  PopUpLevelUpPrefeb: {fileID: 2336303339269453966, guid: f93771efeaea94122934bf78bc91baca, type: 3}
   isFlipped: 0
 --- !u!50 &1410061253463331633
 Rigidbody2D:
