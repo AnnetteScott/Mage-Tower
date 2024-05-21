@@ -10,12 +10,18 @@ public class ShootProjectile : MonoBehaviour
     private void Awake() {
         if (spellswap == null)
         {
-            Debug.LogError("SpellSwap reference is not set in the Inspector");
+            spellswap = FindObjectOfType<SpellSwap>();
+            if (spellswap == null) {
+                Debug.LogError("SpellSwap reference is not set in the Inspector");
+            }
         }
 
         if (playerScript == null)
         {
-            Debug.LogError("Player reference is not set in the Inspector");
+            playerScript = FindObjectOfType<Player>();
+            if (playerScript == null) {
+                Debug.LogError("Player reference is not set in the Inspector");
+            }
         }
 
         GetComponent<PlayerAim>().OnShoot += ShootProjectile_OnShoot;
@@ -29,7 +35,11 @@ public class ShootProjectile : MonoBehaviour
         }
 
         Transform spellType = spellswap.GetCurrentSpell();
-        Transform bulletTranform = Instantiate(spellType, e.endPointPosition, Quaternion.identity);
-        bulletTranform.GetComponent<Bullet>().Setup(e.shootDirection);
+        // Calculate the angle between the shooting direction and the right direction (default bullet direction)
+        Vector3 shootDirection = e.shootDirection - e.endPointPosition;
+        float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
+        
+        Transform bulletTransform = Instantiate(spellType, e.endPointPosition, Quaternion.Euler(0, 0, angle));
+        bulletTransform.GetComponent<Bullet>().Setup(e.shootDirection);
     }
 } 

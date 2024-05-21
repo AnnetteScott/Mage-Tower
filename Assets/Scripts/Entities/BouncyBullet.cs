@@ -9,20 +9,21 @@ public class BouncyBullet : Bullet
 
     private Rigidbody2D rb;
 
-    private void Start()
+    private new void Start()
     {
         startPoint = transform.position;
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Setup(Vector3 end)
+    public new void Setup(Vector3 end)
     {
         base.Setup(end);
-        Vector2 direction = (end - transform.position).normalized;
+        Vector2 direction = ((Vector2)end - (Vector2)transform.position).normalized;
         rb.velocity = direction * moveSpeed;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    // Override the OnTriggerStay2D method to prevent the base implementation from being called
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
@@ -34,7 +35,7 @@ public class BouncyBullet : Bullet
             else
             {
                 // Reflect the bullet's velocity upon collision
-                Vector2 normal = collision.contacts[0].normal;
+                Vector2 normal = (transform.position - collision.transform.position).normalized;
                 rb.velocity = Vector2.Reflect(rb.velocity, normal);
             }
         }

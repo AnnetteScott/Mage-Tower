@@ -9,6 +9,10 @@ public class SpellSwap : MonoBehaviour
 
     private Transform currentSpell;
 
+    //Mana costs for each spell
+    private int mbCost = 2;
+    private int bbCost = 4;
+
     private void Start()
     {
         // Set the default spell to MagicBullet
@@ -33,5 +37,16 @@ public class SpellSwap : MonoBehaviour
     public Transform GetCurrentSpell()
     {
         return currentSpell;
+    }
+
+    public int GetCurrentSpellManaCost() {
+        if(currentSpell = MagicBullet) {
+            return mbCost;
+        }
+        else if (currentSpell = BouncyBullet) {
+            return bbCost;
+        } else {
+            return 0; //default cost if no spell is selected
+        }
     }
 }

@@ -1612,6 +1612,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7057662310182746393, guid: d5ce6ca07d00ff74a826687bf41d2014, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057662310182746393, guid: d5ce6ca07d00ff74a826687bf41d2014, type: 3}
+      propertyPath: spellswap
+      value: 
+      objectReference: {fileID: 1423685630}
     - target: {fileID: 8810821511841382853, guid: d5ce6ca07d00ff74a826687bf41d2014, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1664,6 +1672,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4515560077448386323, guid: ef16877d141a2924198999297b994b05, type: 3}
   m_PrefabInstance: {fileID: 82141217}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1423685630 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4868851027248721079, guid: d5ce6ca07d00ff74a826687bf41d2014, type: 3}
+  m_PrefabInstance: {fileID: 1234028060}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 445708dcd4583484399492ec140fdf3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1482845951
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,12 +18,12 @@ public class PlayerAim : MonoBehaviour
     private SpriteRenderer staffRenderer;
 
     public Player playerScript;
+    private SpellSwap spellswap;
 
     public event EventHandler<OnShootEventArgs> OnShoot;
     public class OnShootEventArgs : EventArgs {
         public Vector3 endPointPosition;
         public Vector3 shootDirection;
-
     } 
     
     private void Awake() 
@@ -40,6 +40,11 @@ public class PlayerAim : MonoBehaviour
         else
         {
             Debug.LogError("Staff transform not found as a child of Aim!");
+        }
+
+        spellswap = FindObjectOfType<SpellSwap>();
+        if (spellswap == null) {
+            Debug.LogError("SpellSwap reference is not set in the Inspector");
         }
     }
 
@@ -112,7 +117,13 @@ public class PlayerAim : MonoBehaviour
     }
 
     private void HandleShooting() {
-        if(Input.GetMouseButtonDown(1) && playerScript.useMana(2)) {
+        //Get the current spell from SpellSwap
+        Transform currentSpell = spellswap.GetCurrentSpell();
+
+        //Get the mana cost for the current spell
+        int manaCost = currentSpell.GetComponent<Bullet>().manaCost;
+
+        if(Input.GetMouseButtonDown(1) && playerScript.useMana(manaCost)) {
             Vector3 mousePositionA = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             OnShoot?.Invoke(this, new OnShootEventArgs {
                 endPointPosition = aimEndPointTransform.position,

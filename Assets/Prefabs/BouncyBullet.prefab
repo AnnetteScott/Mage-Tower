@@ -95,7 +95,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1057730730367344909}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -123,7 +123,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1057730730367344909}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 4c8de041003effc4e988ff88d328505e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -157,7 +157,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.13, y: 0.32}
+  m_Size: {x: 1.02, y: 0.75}
   m_EdgeRadius: 0
 --- !u!114 &4952436037719619693
 MonoBehaviour:
@@ -173,4 +173,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 12
   damage: 8
+  manaCost: 4
   maxBounces: 3

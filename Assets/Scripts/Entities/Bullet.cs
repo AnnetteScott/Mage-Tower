@@ -9,8 +9,9 @@ public class Bullet : MonoBehaviour
     private float percentage;
 
     public int damage = 4;
+    public int manaCost = 2;
 
-    private void Start() {
+    protected void Start() {
         startPoint = transform.position;
     }
 
