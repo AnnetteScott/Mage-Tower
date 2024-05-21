@@ -3,8 +3,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float moveSpeed = 20f;
-    private Vector2 endPoint;
-    private Vector2 startPoint;
+    protected Vector2 endPoint;
+    protected Vector2 startPoint;
     private float distance;
     private float percentage;
 

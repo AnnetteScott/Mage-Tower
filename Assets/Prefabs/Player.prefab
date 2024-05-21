@@ -937,6 +937,7 @@ GameObject:
   - component: {fileID: 396522273519855524}
   - component: {fileID: 5404180780347152378}
   - component: {fileID: 7057662310182746393}
+  - component: {fileID: 4868851027248721079}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -1037,7 +1038,6 @@ MonoBehaviour:
   feetCollider: {fileID: 396522273519855524}
   bodyCollider: {fileID: 8587842702236181806}
   playerSprite: {fileID: 3008215847361205683}
-  staffSprite: {fileID: 2870104905771699694}
   jumpHeight: 6
   walkingSpeed: 4
   runningSpeed: 6
@@ -1245,7 +1245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad870a2da7b2d0f49a31b0c1784de87c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MagicBullet: {fileID: 7529463756374091011, guid: 73db19743cdba2a4390a51143ecf1554, type: 3}
+  spellswap: {fileID: 4868851027248721079}
+  playerScript: {fileID: 0}
 --- !u!114 &7057662310182746393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1261,6 +1262,20 @@ MonoBehaviour:
   aimTransform: {fileID: 8664494442120304998}
   endPointOffset: {x: 0.75, y: 1, z: 0}
   playerScript: {fileID: 6826082457660371653}
+--- !u!114 &4868851027248721079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3934502405863453982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 445708dcd4583484399492ec140fdf3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MagicBullet: {fileID: 7529463756374091011, guid: 73db19743cdba2a4390a51143ecf1554, type: 3}
+  BouncyBullet: {fileID: 7529463756374091011, guid: 51467246a7bd7bb44aa3bbaf03e53fbc, type: 3}
 --- !u!1 &4175918837643086886
 GameObject:
   m_ObjectHideFlags: 0
