@@ -367,7 +367,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -192, y: -52}
+  m_AnchoredPosition: {x: -192, y: -39}
   m_SizeDelta: {x: 358.5308, y: 241.2482}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &227941954
@@ -390,8 +390,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Move - WASD\n\tdash: ctrl\n\nAim - Mouse\n\tfire spells: right click\n\tmelee
-    attack: left click\n\nPause menu - Escape\n"
+  m_text: "Move - WASD\n\tdash: ctrl\n\nInventory - Tab\n\nAim - Mouse\n\tfire spells:
+    right click\n\tmelee attack: left click\n\nPause menu - Escape\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e6e60654d4c5bc94e9ceaa026bda236d, type: 2}
   m_sharedMaterial: {fileID: 3514820578698833661, guid: e6e60654d4c5bc94e9ceaa026bda236d, type: 2}
@@ -418,8 +418,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28.1
-  m_fontSizeBase: 28.1
+  m_fontSize: 25.31
+  m_fontSizeBase: 25.31
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1334,7 +1334,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 230, y: -158}
+  m_AnchoredPosition: {x: 231, y: -158}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &966727589
@@ -2020,7 +2020,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1298900372
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2224,7 +2224,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -51, y: 26}
+  m_AnchoredPosition: {x: -50, y: 44}
   m_SizeDelta: {x: 501.3926, y: 111.0131}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1549906173
