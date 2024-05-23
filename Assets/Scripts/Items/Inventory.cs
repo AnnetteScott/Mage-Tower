@@ -108,8 +108,8 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
         {
             if(staffSlot.transform.childCount > 0)
             {
-                Transform nextSlot = InventorySlots.transform.GetChild(GlobalData.inventory.Count);
-                staffSlot.transform.GetChild(0).gameObject.transform.SetParent(nextSlot);
+                GameObject item = staffSlot.transform.GetChild(0).gameObject;
+                GlobalData.inventory.Add(item.name.Replace("(Clone)", ""));
             }
 
             float power = clickedItem.GetComponent<Weapon>().power;
@@ -126,8 +126,8 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
         {
             if(amourSlot.transform.childCount > 0)
             {
-                Transform nextSlot = InventorySlots.transform.GetChild(GlobalData.inventory.Count);
-                amourSlot.transform.GetChild(0).gameObject.transform.SetParent(nextSlot);
+                GameObject item = amourSlot.transform.GetChild(0).gameObject;
+                GlobalData.inventory.Add(item.name.Replace("(Clone)", ""));
             }
 
             float armour = clickedItem.GetComponent<Armour>().armour;
