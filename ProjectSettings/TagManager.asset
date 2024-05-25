@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - Weapon
   - Projectile
+  - LevelManager
+  - Key
   layers:
   - Default
   - TransparentFX

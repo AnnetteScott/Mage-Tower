@@ -14,30 +14,32 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GameIsPaused) {
+            if (GameIsPaused)
+            {
                 Resume();
             }
-            else {
+            else
+            {
                 Pause();
             }
         }
     }
 
-    public void Resume ()
+    public void Resume()
     {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
 
-    void Pause ()
+    void Pause()
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
 
-        public void returnToMain ()
+    public void returnToMain()
     {
         //Need to add "Game" scene to build settings in unity after the 'MainMenu' for this to function, waiting on game creation
         SceneManager.LoadScene(0);

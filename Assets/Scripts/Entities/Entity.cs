@@ -20,8 +20,8 @@ public class Entity : MonoBehaviour
     public void addHealth(float health)
     {
         health += Mathf.Abs(health);
-        if(health > maxHealth) 
-        { 
+        if (health > maxHealth)
+        {
             health = maxHealth;
         }
 
@@ -62,7 +62,7 @@ public class Entity : MonoBehaviour
         if (gameObject.transform.parent != null && gameObject.transform.parent.CompareTag("Enemy"))
         {
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-            if(players.Length > 0)
+            if (players.Length > 0)
             {
                 players[0].GetComponent<Player>().killedEnemy(); ;
             }

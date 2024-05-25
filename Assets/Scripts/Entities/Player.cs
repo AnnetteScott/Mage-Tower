@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class Player : Entity
 {
@@ -79,7 +80,7 @@ public class Player : Entity
             rigidBody.velocity = new Vector2(isDashingRight ? -dashingSpeed : dashingSpeed, 0);
             useMana(dashingManaUse);
         }
-        else if(dashingTimer > dashingTimeout - dashingTimelimit)
+        else if (dashingTimer > dashingTimeout - dashingTimelimit)
         {
             rigidBody.velocity = new Vector2(isDashingRight ? -dashingSpeed : dashingSpeed, 0);
         }
@@ -107,7 +108,7 @@ public class Player : Entity
             rigidBody.velocity = new Vector2(0, rigidBody.velocity.y);
         }
 
-        if(dashingTimer > 0)
+        if (dashingTimer > 0)
         {
             dashingTimer -= Time.deltaTime;
         }
@@ -148,7 +149,7 @@ public class Player : Entity
     /// <returns>true if the mana was used, false otherwise</returns>
     public Boolean useMana(float manaUsed)
     {
-        if(mana - manaUsed >= 0) 
+        if (mana - manaUsed >= 0)
         {
             mana -= manaUsed;
             return true;
@@ -211,7 +212,7 @@ public class Player : Entity
         addExperience(3);
         addHealth(2);
         mana += 2;
-        if(mana > maxMana)
+        if (mana > maxMana)
         {
             mana = maxMana;
         }

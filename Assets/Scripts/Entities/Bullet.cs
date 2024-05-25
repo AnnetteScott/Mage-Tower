@@ -10,15 +10,16 @@ public class Bullet : MonoBehaviour
 
     public int damage = 4;
 
-    private void Start() {
+    private void Start()
+    {
         startPoint = transform.position;
     }
 
-    public void Setup(Vector3 end) 
+    public void Setup(Vector3 end)
     {
         endPoint = end;
     }
-        
+
     private void FixedUpdate()
     {
         distance = Vector2.Distance(startPoint, endPoint);

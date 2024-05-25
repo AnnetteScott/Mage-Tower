@@ -12,8 +12,9 @@ public class LevelMenu : MonoBehaviour
     private bool addXP = false;
 
     // Update is called once per frame
-    void Update () {
- 
+    void Update()
+    {
+
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
             if (!addXP)
@@ -25,25 +26,25 @@ public class LevelMenu : MonoBehaviour
                 }
                 addXP = true;
             }
-            
+
 
             Next();
         }
     }
 
-    void Next ()
+    void Next()
     {
         levelMenuUI.SetActive(true);
         LevelIsNext = true;
     }
 
-    public void NextLevelButton ()
+    public void NextLevelButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         LevelIsNext = false;
     }
 
-    public void returnToMainNext ()
+    public void returnToMainNext()
     {
         SceneManager.LoadScene(0);
         LevelIsNext = false;
