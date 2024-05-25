@@ -11,6 +11,8 @@ TagManager:
   - LevelManager
   - Key
   - Torch
+  - Block
+  - Secret Passage
   layers:
   - Default
   - TransparentFX
