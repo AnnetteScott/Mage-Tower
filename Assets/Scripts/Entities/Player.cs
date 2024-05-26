@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class Player : Entity
 {
@@ -41,6 +40,10 @@ public class Player : Entity
     private bool isDashingRight = true;
 
     public bool isFlipped = false;
+
+    // Level 9 puzzle variables
+    private bool hasKey = false;
+    public bool HasKey => hasKey;
 
     void Start()
     {
@@ -255,6 +258,35 @@ public class Player : Entity
         if (collision.gameObject.CompareTag("Ground"))
         {
             onGround = false;
+        }
+    }
+
+    // Level 9 Puzzle code
+    public void PickUpKey()
+    {
+        hasKey = true;
+        Debug.Log("Key picked up!");
+    }
+
+    public void UseKey()
+    {
+        if (hasKey)
+        {
+            hasKey = false;
+            Debug.Log("Key used!");
+        }
+    }
+
+    public void AddExperience(int xp)
+    {
+        if (xp > 0)
+        {
+            // Add experience points to the player
+            Debug.Log($"{xp} XP added.");
+        }
+        else
+        {
+            Debug.LogWarning("XP value is invalid.");
         }
     }
 }

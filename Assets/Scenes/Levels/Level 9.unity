@@ -266,6 +266,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 390910941247067452, guid: 2e72fb3614f2c19488b7efa3cf58ccff, type: 3}
       insertIndex: -1
       addedObject: {fileID: 49078785}
+    - targetCorrespondingSourceObject: {fileID: 390910941247067452, guid: 2e72fb3614f2c19488b7efa3cf58ccff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 49078787}
   m_SourcePrefab: {fileID: 100100000, guid: 2e72fb3614f2c19488b7efa3cf58ccff, type: 3}
 --- !u!1 &49078784 stripped
 GameObject:
@@ -352,6 +355,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 9.96, y: 9.96}
   m_EdgeRadius: 0
+--- !u!114 &49078787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49078784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f664b84f8b57ad48b3e9bf31e670ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &134202626
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4148,11 +4163,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crypt Door
       objectReference: {fileID: 0}
+    - target: {fileID: 8131402810394482626, guid: 7b49261b363a4bd45a93c5a63a53a061, type: 3}
+      propertyPath: m_TagString
+      value: Crypt Door
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8131402810394482626, guid: 7b49261b363a4bd45a93c5a63a53a061, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3317214238942328974}
   m_SourcePrefab: {fileID: 100100000, guid: 7b49261b363a4bd45a93c5a63a53a061, type: 3}
+--- !u!1 &3317214238942328973 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8131402810394482626, guid: 7b49261b363a4bd45a93c5a63a53a061, type: 3}
+  m_PrefabInstance: {fileID: 3317214238942328972}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3317214238942328974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3317214238942328973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9171b8c55067f8044873d6366de5e370, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xpReward: 50
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4163,5 +4203,5 @@ SceneRoots:
   - {fileID: 1322789569}
   - {fileID: 367442477}
   - {fileID: 1262528001}
-  - {fileID: 3317214238942328972}
   - {fileID: 49078783}
+  - {fileID: 3317214238942328972}

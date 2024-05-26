@@ -13,6 +13,7 @@ TagManager:
   - Torch
   - Block
   - Secret Passage
+  - Crypt Door
   layers:
   - Default
   - TransparentFX
