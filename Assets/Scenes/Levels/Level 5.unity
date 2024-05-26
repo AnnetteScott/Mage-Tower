@@ -3108,6 +3108,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2419922898492758349, guid: e870f978d4f9c6649a35bed852874a3b, type: 3}
+      propertyPath: m_TagString
+      value: Block
+      objectReference: {fileID: 0}
+    - target: {fileID: 5114262650151001461, guid: e870f978d4f9c6649a35bed852874a3b, type: 3}
+      propertyPath: m_text
+      value: 'Grab & Push the Block to the Secret Passage Using B
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5114262650151001461, guid: e870f978d4f9c6649a35bed852874a3b, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5114262650151001461, guid: e870f978d4f9c6649a35bed852874a3b, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7797033245629278011, guid: e870f978d4f9c6649a35bed852874a3b, type: 3}
       propertyPath: m_Name
       value: Block

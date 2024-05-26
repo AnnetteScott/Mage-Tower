@@ -271,7 +271,8 @@ PrefabInstance:
       value: Block of Ice (7)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -629,7 +630,8 @@ PrefabInstance:
       value: Block of Ice (11)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -1067,7 +1069,8 @@ PrefabInstance:
       value: Block of Ice (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -1239,7 +1242,8 @@ PrefabInstance:
       value: Block of Ice (10)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -1322,7 +1326,8 @@ PrefabInstance:
       value: Block of Ice (15)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -1415,7 +1420,8 @@ PrefabInstance:
       value: Block of Ice (9)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -1498,7 +1504,8 @@ PrefabInstance:
       value: Block of Ice (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -1748,7 +1755,8 @@ PrefabInstance:
       value: Block of Ice (20)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -1831,7 +1839,8 @@ PrefabInstance:
       value: Block of Ice (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -2005,7 +2014,8 @@ PrefabInstance:
       value: Block of Ice (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -2088,7 +2098,8 @@ PrefabInstance:
       value: Block of Ice (16)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -3496,7 +3507,8 @@ PrefabInstance:
       value: Block of Ice (14)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -3665,7 +3677,8 @@ PrefabInstance:
       value: Block of Ice (6)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -4034,7 +4047,8 @@ PrefabInstance:
       value: Block of Ice (17)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -4209,7 +4223,8 @@ PrefabInstance:
       value: Block of Ice (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -4378,7 +4393,8 @@ PrefabInstance:
       value: Block of Ice (13)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -4511,7 +4527,8 @@ PrefabInstance:
       value: Block of Ice (21)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -4766,7 +4783,8 @@ PrefabInstance:
       value: Block of Ice (12)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -4849,7 +4867,8 @@ PrefabInstance:
       value: Block of Ice (18)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -4932,7 +4951,8 @@ PrefabInstance:
       value: Block of Ice (19)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -5015,7 +5035,8 @@ PrefabInstance:
       value: Block of Ice (8)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2407950213832121422, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
@@ -5130,9 +5151,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 148951626805271014, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
       propertyPath: m_text
-      value: 'Touch and Use I to Destroy the Ice
-
-'
+      value: Touch and Destroy the Blocks of Ice Using I
+      objectReference: {fileID: 0}
+    - target: {fileID: 148951626805271014, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
+      propertyPath: m_fontSize
+      value: 19.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 148951626805271014, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1187944814915417358, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5176,6 +5203,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
       propertyPath: m_Name
+      value: Block of Ice
+      objectReference: {fileID: 0}
+    - target: {fileID: 3750515555019353621, guid: 61dcc8fb1c8a92c4eac8bb18d3c8edf1, type: 3}
+      propertyPath: m_TagString
       value: Block of Ice
       objectReference: {fileID: 0}
     m_RemovedComponents: []
