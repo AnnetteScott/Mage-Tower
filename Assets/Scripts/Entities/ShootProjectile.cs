@@ -39,7 +39,13 @@ public class ShootProjectile : MonoBehaviour
         Vector3 shootDirection = e.shootDirection - e.endPointPosition;
         float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
         
-        Transform bulletTransform = Instantiate(spellType, e.endPointPosition, Quaternion.Euler(0, 0, angle));
-        bulletTransform.GetComponent<Bullet>().Setup(e.shootDirection);
+        if(spellType.GetComponent<FireSpark>() != null) {
+            // If the spell is Fire Spark, it should be stationary at the cursor's position
+            Transform bulletTransform = Instantiate(spellType, e.shootDirection, Quaternion.identity);
+            bulletTransform.GetComponent<FireSpark>().Setup(e.shootDirection);
+        } else {
+            Transform bulletTransform = Instantiate(spellType, e.endPointPosition, Quaternion.Euler(0, 0, angle));
+            bulletTransform.GetComponent<Bullet>().Setup(e.shootDirection);
+        }   
     }
 } 

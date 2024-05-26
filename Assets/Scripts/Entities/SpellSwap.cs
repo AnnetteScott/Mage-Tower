@@ -6,12 +6,14 @@ public class SpellSwap : MonoBehaviour
 {
     [SerializeField] private Transform MagicBullet;
     [SerializeField] private Transform BouncyBullet;
+    [SerializeField] private Transform FireSpark;
 
     private Transform currentSpell;
 
     //Mana costs for each spell
     private int mbCost = 2;
     private int bbCost = 4;
+    private int fsCost = 1;
 
     private void Start()
     {
@@ -32,6 +34,11 @@ public class SpellSwap : MonoBehaviour
             currentSpell = BouncyBullet;
             Debug.Log("Switched to Bouncy Bullet");
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            currentSpell = FireSpark;
+            Debug.Log("Switched to Fire Spark");
+        }
     }
 
     public Transform GetCurrentSpell()
@@ -45,6 +52,9 @@ public class SpellSwap : MonoBehaviour
         }
         else if (currentSpell = BouncyBullet) {
             return bbCost;
+        }
+        else if (currentSpell = FireSpark) {
+            return fsCost;
         } else {
             return 0; //default cost if no spell is selected
         }

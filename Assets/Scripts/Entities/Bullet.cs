@@ -11,11 +11,11 @@ public class Bullet : MonoBehaviour
     public int damage = 4;
     public int manaCost = 2;
 
-    protected void Start() {
+    protected virtual void Start() {
         startPoint = transform.position;
     }
 
-    public void Setup(Vector3 end) 
+    public virtual void Setup(Vector3 end) 
     {
         endPoint = end;
     }

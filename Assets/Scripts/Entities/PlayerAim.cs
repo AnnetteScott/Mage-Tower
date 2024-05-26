@@ -125,6 +125,7 @@ public class PlayerAim : MonoBehaviour
 
         if(Input.GetMouseButtonDown(1) && playerScript.useMana(manaCost)) {
             Vector3 mousePositionA = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePositionA.z = 0;
             OnShoot?.Invoke(this, new OnShootEventArgs {
                 endPointPosition = aimEndPointTransform.position,
                 shootDirection = mousePositionA, // Passing the normalized shoot direction
