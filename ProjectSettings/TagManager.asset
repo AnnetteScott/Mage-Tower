@@ -12,9 +12,9 @@ TagManager:
   - Key
   - Torch
   - Block
-  - Secret Passage
   - Crypt Door
   - Block of Ice
+  - Secret Passage
   layers:
   - Default
   - TransparentFX

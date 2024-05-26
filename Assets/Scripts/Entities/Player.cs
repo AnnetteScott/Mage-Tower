@@ -41,6 +41,10 @@ public class Player : Entity
 
     public bool isFlipped = false;
 
+    // level 5 puzzle variables
+    public KeyCode pickUpKey = KeyCode.B; // Define the key to pick up the block
+    private GameObject carriedBlock = null;
+
     // Level 9 puzzle variables
     private bool hasKey = false;
     public bool HasKey => hasKey;
@@ -258,6 +262,44 @@ public class Player : Entity
         if (collision.gameObject.CompareTag("Ground"))
         {
             onGround = false;
+        }
+    }
+
+    // level 5 puzzle code
+    void Update()
+    {
+        if (Input.GetKeyDown(pickUpKey))
+        {
+            if (carriedBlock == null && playerNearbyBlock != null)
+            {
+                // Pick up the block
+                playerNearbyBlock.GetComponent<BlockInteraction>().PickUp();
+                carriedBlock = playerNearbyBlock;
+            }
+            else if (carriedBlock != null)
+            {
+                // Drop the block
+                carriedBlock.GetComponent<BlockInteraction>().Drop();
+                carriedBlock = null;
+            }
+        }
+    }
+
+    private GameObject playerNearbyBlock = null;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Block"))
+        {
+            playerNearbyBlock = collision.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Block"))
+        {
+            playerNearbyBlock = null;
         }
     }
 
