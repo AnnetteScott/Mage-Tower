@@ -1,7 +1,8 @@
-using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Inventory : MonoBehaviour, IPointerDownHandler
 {
@@ -10,6 +11,7 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
     public GameObject staffSlot;
     public GameObject amourSlot;
     public GameObject InventorySlots;
+    public TextMeshProUGUI itemPower;
     private GameObject clickedItem;
 
     // Update is called once per frame
@@ -92,6 +94,23 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
             clickedItem = gameObject;
             Image slotImage = clickedItem.transform.parent.gameObject.GetComponent<Image>();
             slotImage.color = Color.cyan;
+            setStats();
+        }
+        else
+        {
+            itemPower.text = string.Empty;
+        }
+    }
+
+    public void setStats()
+    {
+        if (clickedItem.GetComponent<Weapon>() != null)
+        {
+            itemPower.text = "Damage Modifier: " + clickedItem.GetComponent<Weapon>().power.ToString() + "x";
+        }
+        else if (clickedItem.GetComponent<Armour>() != null)
+        {
+            itemPower.text = "Amour: " + clickedItem.GetComponent<Armour>().armour.ToString();
         }
     }
 
@@ -146,7 +165,7 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
         Image slotImage = clickedItem.transform.parent.gameObject.GetComponent<Image>();
         slotImage.color = Color.white;
         clickedItem = null;
-
+        itemPower.text = string.Empty;
     }
 
     public void unequip()
@@ -180,6 +199,7 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
         slotImage.color = Color.white;
         displayInventoryItems();
         clickedItem = null;
+        itemPower.text = string.Empty;
     }
 
     public void Resume()
