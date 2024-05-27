@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2307614876613869897}
   - component: {fileID: 4359749371953763351}
   m_Layer: 0
-  m_Name: Amour
+  m_Name: Armour
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
