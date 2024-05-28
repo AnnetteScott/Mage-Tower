@@ -79,6 +79,7 @@ public class Entity : MonoBehaviour
             {
                 GameObject newInstance = Instantiate(drop);
                 newInstance.transform.SetParent(transform.root);
+                newInstance.transform.position = gameObject.transform.position;
             }
             Destroy(gameObject.transform.parent.gameObject);
         }
