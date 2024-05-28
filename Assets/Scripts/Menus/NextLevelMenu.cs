@@ -14,14 +14,18 @@ public class LevelMenu : MonoBehaviour
     // Update is called once per frame
     void Update () {
  
-        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && GameObject.FindGameObjectsWithTag("Item").Length == 0)
         {
             if (!addXP)
             {
                 GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
                 if (players.Length > 0)
                 {
-                    players[0].GetComponent<Player>().addExperience(2); ;
+                    Player player = players[0].GetComponent<Player>();
+                    player.addExperience(2);
+                    GlobalData.playerMaxHealth = player.maxHealth;
+                    GlobalData.playerMaxMana = player.maxMana;
+                    GlobalData.playerXP = player.getExperience();
                 }
                 addXP = true;
             }

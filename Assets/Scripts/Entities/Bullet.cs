@@ -35,6 +35,19 @@ public class Bullet : MonoBehaviour
         }
     }
 
+    public float getDamage()
+    {
+        float damageModifier = 1;
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        if (players.Length > 0)
+        {
+            damageModifier = players[0].GetComponent<Player>().power;
+        }
+
+        return damage * damageModifier;
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
