@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using static UnityEditor.UIElements.ToolbarMenu;
 
 public class Inventory : MonoBehaviour, IPointerDownHandler
 {
@@ -12,11 +13,21 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
     public GameObject amourSlot;
     public GameObject InventorySlots;
     public TextMeshProUGUI itemPower;
+    public Image playerImage;
+    public Image staffCrystal;
     private GameObject clickedItem;
+    private GameObject player;
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectsWithTag("Player")[0];
+        setPlayerVisuals();
+    }
 
     // Update is called once per frame
     void Update()
     {
+        //Show the inventory menu
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (GameIsPaused)
@@ -32,8 +43,12 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
         }
     }
 
+    /// <summary>
+    /// Display all the items in the inventory meny
+    /// </summary>
     private void displayInventoryItems()
     {
+        //Clear all items
         for(int i = 0; i < InventorySlots.transform.childCount; i++)
         {
             if(InventorySlots.transform.GetChild(i).childCount > 0)
@@ -55,6 +70,7 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
         staffSlot.gameObject.GetComponent<Image>().color = Color.white;
         amourSlot.gameObject.GetComponent<Image>().color = Color.white;
 
+        //Add all items
         int index = 0;
         foreach (string name in GlobalData.inventory)
         {
@@ -70,6 +86,8 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
             var resource = Resources.Load(GlobalData.equippedStaffItem);
             GameObject newInstance = Instantiate(resource) as GameObject;
             newInstance.transform.SetParent(staffSlot.transform);
+            string variant = newInstance.name.Replace("(Clone)", "").Replace(" Variant", "").Split(" - ")[1];
+            staffCrystal.sprite = (Sprite)Resources.Load("Staff Crystal - " + variant, typeof(Sprite));
         }
 
         if(GlobalData.equippedArmourItem != null)
@@ -77,7 +95,28 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
             var resource = Resources.Load(GlobalData.equippedArmourItem);
             GameObject newInstance = Instantiate(resource) as GameObject;
             newInstance.transform.SetParent(amourSlot.transform);
+            string variant = newInstance.name.Replace("(Clone)", "").Replace(" Variant", "").Split(" - ")[1];
+            playerImage.sprite = (Sprite)Resources.Load("Player - " + variant, typeof(Sprite));
         }
+    }
+
+    /// <summary>
+    /// Set the in game player character sprites to match equipped items
+    /// </summary>
+    private void setPlayerVisuals()
+    {
+        if (GlobalData.equippedStaffItem != null)
+        {
+            string crystalVariant = GlobalData.equippedStaffItem.Replace(" Variant", "").Split(" - ")[1];
+            GameObject[] staffCrystal = GameObject.FindGameObjectsWithTag("StaffCrystal");
+            staffCrystal[0].GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("Staff Crystal - " + crystalVariant, typeof(Sprite));
+        }
+
+        if (GlobalData.equippedArmourItem != null)
+        {
+            string armourVariant = GlobalData.equippedArmourItem.Replace(" Variant", "").Split(" - ")[1];
+            player.GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("Player - " + armourVariant, typeof(Sprite));
+        }  
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -102,6 +141,9 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
         }
     }
 
+    /// <summary>
+    /// Display armour/weapon stats
+    /// </summary>
     public void setStats()
     {
         if (clickedItem.GetComponent<Weapon>() != null)
@@ -114,6 +156,9 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
         }
     }
 
+    /// <summary>
+    /// Equip the clicked item
+    /// </summary>
     public void equip()
     {
         if(!clickedItem)
@@ -122,7 +167,7 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
         }
 
         string name = clickedItem.name.Replace("(Clone)", "");
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        string variant = name.Replace(" Variant", "").Split(" - ")[1];
         if(clickedItem.GetComponent<Weapon>() != null)
         {
             if(staffSlot.transform.childCount > 0)
@@ -134,11 +179,7 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
             float power = clickedItem.GetComponent<Weapon>().power;
             GlobalData.equippedStaffItem = name;
             GlobalData.playerPower = power;
-
-            if (players.Length > 0)
-            {
-                players[0].GetComponent<Player>().power = power;
-            }
+            player.GetComponent<Player>().power = power;
 
         }
         else if(clickedItem.GetComponent<Armour>() != null)
@@ -152,11 +193,7 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
             float armour = clickedItem.GetComponent<Armour>().armour;
             GlobalData.equippedArmourItem = name;
             GlobalData.playerArmour = armour;
-
-            if (players.Length > 0)
-            {
-                players[0].GetComponent<Player>().armour = armour;
-            }
+            player.GetComponent<Player>().armour = armour;
         }
 
 
@@ -166,8 +203,12 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
         slotImage.color = Color.white;
         clickedItem = null;
         itemPower.text = string.Empty;
+        setPlayerVisuals();
     }
 
+    /// <summary>
+    /// unequip the clicked item
+    /// </summary>
     public void unequip()
     {
         if (!clickedItem)
@@ -176,24 +217,17 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
         }
 
         Transform nextSlot = InventorySlots.transform.GetChild(GlobalData.inventory.Count);
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         clickedItem.transform.SetParent(nextSlot);
         GlobalData.inventory.Add(clickedItem.name.Replace("(Clone)", ""));
         if (clickedItem.GetComponent<Weapon>() != null)
         {
+            player.GetComponent<Player>().power = 0;
             GlobalData.equippedStaffItem = null;
-            if (players.Length > 0)
-            {
-                players[0].GetComponent<Player>().power = 0;
-            }
         }
         else if (clickedItem.GetComponent<Armour>() != null)
         {
             GlobalData.equippedArmourItem = null;
-            if (players.Length > 0)
-            {
-                players[0].GetComponent<Player>().armour = 0;
-            }
+            player.GetComponent<Player>().armour = 0;
         }
         Image slotImage = clickedItem.transform.parent.gameObject.GetComponent<Image>();
         slotImage.color = Color.white;
