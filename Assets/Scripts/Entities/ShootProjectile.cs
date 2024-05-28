@@ -36,7 +36,7 @@ public class ShootProjectile : MonoBehaviour
 
         Transform spellType = spellswap.GetCurrentSpell();
         // Calculate the angle between the shooting direction and the right direction (default bullet direction)
-        Vector3 shootDirection = e.shootDirection - e.endPointPosition;
+        Vector3 shootDirection = (e.shootDirection - e.endPointPosition).normalized;
         float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
         
         if(spellType.GetComponent<FireSpark>() != null) {

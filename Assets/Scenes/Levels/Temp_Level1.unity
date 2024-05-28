@@ -2647,6 +2647,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4868851027248721079, guid: d5ce6ca07d00ff74a826687bf41d2014, type: 3}
+      propertyPath: fireStaffSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2340b0bd9974db644b7886fad84ee7d7, type: 3}
+    - target: {fileID: 4868851027248721079, guid: d5ce6ca07d00ff74a826687bf41d2014, type: 3}
+      propertyPath: magicStaffSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c09eb4cfd8d8dbb47a84ff7363f4640d, type: 3}
+    - target: {fileID: 4868851027248721079, guid: d5ce6ca07d00ff74a826687bf41d2014, type: 3}
+      propertyPath: bouncyStaffSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5cb1f9d7aa8e93d4da8892780747eb01, type: 3}
     - target: {fileID: 4963289083935214664, guid: d5ce6ca07d00ff74a826687bf41d2014, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2666,7 +2678,7 @@ PrefabInstance:
     - target: {fileID: 5404180780347152378, guid: d5ce6ca07d00ff74a826687bf41d2014, type: 3}
       propertyPath: playerScript
       value: 
-      objectReference: {fileID: 237734375}
+      objectReference: {fileID: 0}
     - target: {fileID: 5766324017602671807, guid: d5ce6ca07d00ff74a826687bf41d2014, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.470213
@@ -2738,7 +2750,7 @@ PrefabInstance:
     - target: {fileID: 7057662310182746393, guid: d5ce6ca07d00ff74a826687bf41d2014, type: 3}
       propertyPath: spellswap
       value: 
-      objectReference: {fileID: 1423685630}
+      objectReference: {fileID: 0}
     - target: {fileID: 7754614775303716538, guid: d5ce6ca07d00ff74a826687bf41d2014, type: 3}
       propertyPath: m_Layer
       value: 0
