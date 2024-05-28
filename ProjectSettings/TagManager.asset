@@ -10,6 +10,12 @@ TagManager:
   - Projectile
   - Item
   - StaffCrystal
+  - LevelCanvas
+  - Key
+  - Block
+  - Torch
+  - Crypt Door
+  - Secret Passage
   layers:
   - Default
   - TransparentFX
