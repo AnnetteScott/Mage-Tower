@@ -63,6 +63,9 @@ public class Player : Entity
         rigidBody.freezeRotation = true;
         mana = maxMana;
         updateGUI();
+
+        power = GlobalData.playerPower;
+        armour = GlobalData.playerArmour;
     }
 
     void FixedUpdate()
@@ -233,6 +236,16 @@ public class Player : Entity
         }
 
         updateGUI();
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            GlobalData.inventory.Add(collision.gameObject.name.Replace("(Clone)", ""));
+            Destroy(collision.gameObject);
+        }
     }
 
     /// <summary>
