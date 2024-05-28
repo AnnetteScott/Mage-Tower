@@ -54,6 +54,7 @@ public class Player : Entity
         rigidBody.freezeRotation = true;
         mana = maxMana;
         updateGUI();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     void FixedUpdate()
@@ -261,8 +262,5 @@ public class Player : Entity
         }
     }
 
-    private void Awake()
-    {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-    }
+  
 }
