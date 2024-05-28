@@ -233,6 +233,7 @@ public class Player : Entity
             hitting = false;
             GameObject enemy = collision.gameObject;
             enemy.GetComponent<Enemy>().takeDamage(damage);
+            audioManager.PlaySFX(audioManager.hit);
         }
     }
 
