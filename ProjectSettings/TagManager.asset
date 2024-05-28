@@ -9,6 +9,7 @@ TagManager:
   - Weapon
   - Projectile
   - Spark
+  - Item
   layers:
   - Default
   - TransparentFX
