@@ -9,6 +9,7 @@ TagManager:
   - Weapon
   - Projectile
   - Item
+  - StaffCrystal
   layers:
   - Default
   - TransparentFX
