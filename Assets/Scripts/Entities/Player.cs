@@ -43,6 +43,17 @@ public class Player : Entity
 
     void Start()
     {
+        if(GlobalData.playerMaxHealth == 0)
+        {
+            GlobalData.playerMaxHealth = maxHealth;
+            GlobalData.playerMaxMana = maxMana;
+            GlobalData.playerXP = 0;
+        }
+
+        maxHealth = GlobalData.playerMaxHealth;
+        maxMana = GlobalData.playerMaxMana;
+        experience = GlobalData.playerXP;
+
         setHealthToMax();
         move.Enable();
         mouse.Enable();
@@ -52,6 +63,9 @@ public class Player : Entity
         rigidBody.freezeRotation = true;
         mana = maxMana;
         updateGUI();
+
+        power = GlobalData.playerPower;
+        armour = GlobalData.playerArmour;
     }
 
     void FixedUpdate()
@@ -192,6 +206,11 @@ public class Player : Entity
         mana = maxMana;
     }
 
+    public int getExperience()
+    {
+        return this.experience;
+    }
+
     public void updateGUI()
     {
         levelText.text = getLevel().ToString();
@@ -217,6 +236,16 @@ public class Player : Entity
         }
 
         updateGUI();
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            GlobalData.inventory.Add(collision.gameObject.name.Replace("(Clone)", ""));
+            Destroy(collision.gameObject);
+        }
     }
 
     /// <summary>
