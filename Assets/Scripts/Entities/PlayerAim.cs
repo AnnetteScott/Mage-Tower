@@ -16,6 +16,7 @@ public class PlayerAim : MonoBehaviour
     private bool cursorBehindPlayer = false;
     private SpriteRenderer playerRenderer;
     private SpriteRenderer staffRenderer;
+    private SpriteRenderer crystalRenderer;
 
     public Player playerScript;
 
@@ -36,6 +37,7 @@ public class PlayerAim : MonoBehaviour
         if (staffTransform != null)
         {
             staffRenderer = staffTransform.GetComponent<SpriteRenderer>();
+            crystalRenderer = staffTransform.GetChild(0).GetComponent<SpriteRenderer>();
         }
         else
         {
@@ -63,6 +65,7 @@ public class PlayerAim : MonoBehaviour
         {
             playerRenderer.flipX = false;
             staffRenderer.flipX = false;
+            crystalRenderer.flipX = false;
         }
         else
         {
@@ -77,6 +80,7 @@ public class PlayerAim : MonoBehaviour
         {
             playerRenderer.flipX = !playerRenderer.flipX;
             staffRenderer.flipX = !staffRenderer.flipX;
+            crystalRenderer.flipX = !crystalRenderer.flipX;
             cursorBehindPlayer = true;
         }
         else if (!newCursorBehindPlayer && cursorBehindPlayer)
