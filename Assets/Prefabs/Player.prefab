@@ -831,7 +831,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: baaeccc2002df0441b9e8f347ea51a5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -839,7 +839,7 @@ SpriteRenderer:
   m_Size: {x: 2.5, y: 2.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &3732898160644908100
@@ -1365,7 +1365,7 @@ MonoBehaviour:
   MagicBullet: {fileID: 7529463756374091011, guid: 73db19743cdba2a4390a51143ecf1554, type: 3}
   BouncyBullet: {fileID: 7529463756374091011, guid: 51467246a7bd7bb44aa3bbaf03e53fbc, type: 3}
   FireSpark: {fileID: 7529463756374091011, guid: 7babc46b8b0b0544b8733a39cce8fa57, type: 3}
-  magicStaffSprite: {fileID: 21300000, guid: c09eb4cfd8d8dbb47a84ff7363f4640d, type: 3}
+  magicStaffSprite: {fileID: 21300000, guid: baaeccc2002df0441b9e8f347ea51a5c, type: 3}
   bouncyStaffSprite: {fileID: 21300000, guid: 5cb1f9d7aa8e93d4da8892780747eb01, type: 3}
   fireStaffSprite: {fileID: 21300000, guid: 2340b0bd9974db644b7886fad84ee7d7, type: 3}
 --- !u!1 &4175918837643086886
