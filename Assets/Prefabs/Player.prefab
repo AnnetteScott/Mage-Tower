@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8810821511841382853}
   - component: {fileID: 6493361510503268135}
   - component: {fileID: 4587187941312002617}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 187380455006806692}
   - component: {fileID: 1688792155954444987}
   - component: {fileID: 7267639737143608552}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 6450113899431481774}
   - component: {fileID: 7899761969963122205}
   - component: {fileID: 8018733863949012624}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 2294266616094898180}
   - component: {fileID: 1902336217604898536}
   - component: {fileID: 6104192195427069823}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -852,7 +852,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7872462376966094645}
   - component: {fileID: 214275959112680966}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: xpSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -942,7 +942,7 @@ GameObject:
   - component: {fileID: 7013960645514685887}
   - component: {fileID: 7938258219615857657}
   - component: {fileID: 1604518705574606624}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: xpFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1022,6 +1022,7 @@ GameObject:
   - component: {fileID: 396522273519855524}
   - component: {fileID: 5404180780347152378}
   - component: {fileID: 7057662310182746393}
+  - component: {fileID: 4868851027248721079}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -1332,7 +1333,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad870a2da7b2d0f49a31b0c1784de87c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MagicBullet: {fileID: 7529463756374091011, guid: 73db19743cdba2a4390a51143ecf1554, type: 3}
+  spellswap: {fileID: 4868851027248721079}
+  playerScript: {fileID: 0}
 --- !u!114 &7057662310182746393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1348,6 +1350,24 @@ MonoBehaviour:
   aimTransform: {fileID: 8664494442120304998}
   endPointOffset: {x: 0.75, y: 1, z: 0}
   playerScript: {fileID: 6826082457660371653}
+--- !u!114 &4868851027248721079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3934502405863453982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 445708dcd4583484399492ec140fdf3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MagicBullet: {fileID: 7529463756374091011, guid: 73db19743cdba2a4390a51143ecf1554, type: 3}
+  BouncyBullet: {fileID: 7529463756374091011, guid: 51467246a7bd7bb44aa3bbaf03e53fbc, type: 3}
+  FireSpark: {fileID: 7529463756374091011, guid: 7babc46b8b0b0544b8733a39cce8fa57, type: 3}
+  magicStaffSprite: {fileID: 21300000, guid: c09eb4cfd8d8dbb47a84ff7363f4640d, type: 3}
+  bouncyStaffSprite: {fileID: 21300000, guid: 5cb1f9d7aa8e93d4da8892780747eb01, type: 3}
+  fireStaffSprite: {fileID: 21300000, guid: 2340b0bd9974db644b7886fad84ee7d7, type: 3}
 --- !u!1 &4175918837643086886
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,7 +1378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1092352830022747238}
   - component: {fileID: 2734405827526349368}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1480,7 +1500,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2604451404391849128}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1597,7 +1617,7 @@ GameObject:
   - component: {fileID: 5280715429834772026}
   - component: {fileID: 2605436439175934105}
   - component: {fileID: 3333357986855724161}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1672,7 +1692,7 @@ GameObject:
   - component: {fileID: 4002679292635080879}
   - component: {fileID: 1697357144255138837}
   - component: {fileID: 4425154144276270893}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: healthFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1781,7 +1801,7 @@ GameObject:
   - component: {fileID: 530879580489408652}
   - component: {fileID: 7834411550797909383}
   - component: {fileID: 8227604131799420052}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: manaFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1889,7 +1909,7 @@ GameObject:
   - component: {fileID: 4963289083935214664}
   - component: {fileID: 8855228571034317616}
   - component: {fileID: 2911017067035746769}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1963,7 +1983,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3224497237183373503}
   - component: {fileID: 3853487017485972221}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2051,7 +2071,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8335215745571582994}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2121,7 +2141,7 @@ GameObject:
   - component: {fileID: 2941013218589632813}
   - component: {fileID: 1439805728110941659}
   - component: {fileID: 5026936431499528088}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2222,7 +2242,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7246382074316847397}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
