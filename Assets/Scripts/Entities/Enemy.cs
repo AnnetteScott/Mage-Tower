@@ -79,5 +79,11 @@ public class Enemy : Entity
             collision.gameObject.GetComponent<Player>().takeDamage(damage);
             hitTimer = hitTimeout;
         }
+
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            takeDamage(collision.gameObject.GetComponent<Bullet>().getDamage());
+            Destroy(collision.gameObject);
+        }
     }
 }

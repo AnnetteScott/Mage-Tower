@@ -5,8 +5,12 @@ public class Entity : MonoBehaviour
 {
     public float maxHealth;
     public int damage;
+    public float armour;
+    public float power;
     public Slider healthSlider;
+    public GameObject drop;
     private float health;
+
 
     /// <summary>
     /// 
@@ -16,6 +20,16 @@ public class Entity : MonoBehaviour
         health = maxHealth;
     }
 
+
+    public void addHealth(float health)
+    {
+        health += Mathf.Abs(health);
+        if(health > maxHealth) 
+        { 
+            health = maxHealth;
+        }
+
+    }
 
     /// <summary>
     /// Gets the health of the entity
@@ -31,10 +45,15 @@ public class Entity : MonoBehaviour
     /// </summary>
     /// <param name="damage"></param>
     /// <returns>int of the remaining health</returns>
-    public float takeDamage(int damage)
+    public float takeDamage(float damage)
     {
-        health -= Mathf.Abs(damage);
-        healthSlider.value = health / maxHealth;
+        float damageDone = damage - armour;
+        if(damageDone > 0)
+        {
+            health -= Mathf.Abs(damageDone);
+            healthSlider.value = health / maxHealth;
+
+        }
 
         if (this.health <= 0)
         {
@@ -51,6 +70,17 @@ public class Entity : MonoBehaviour
     {
         if (gameObject.transform.parent != null && gameObject.transform.parent.CompareTag("Enemy"))
         {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            if(players.Length > 0)
+            {
+                players[0].GetComponent<Player>().killedEnemy();
+            }
+            if(drop != null)
+            {
+                GameObject newInstance = Instantiate(drop);
+                newInstance.transform.SetParent(transform.root);
+                newInstance.transform.position = gameObject.transform.position;
+            }
             Destroy(gameObject.transform.parent.gameObject);
         }
         else
