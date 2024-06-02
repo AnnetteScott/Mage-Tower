@@ -37,11 +37,17 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = true;
     }
 
-        public void returnToMain ()
+    public void returnToMain ()
     {
         //Need to add "Game" scene to build settings in unity after the 'MainMenu' for this to function, waiting on game creation
         SceneManager.LoadScene(0);
         GameIsPaused = false;
         Time.timeScale = 1f;
+    }
+
+    public void SaveGame()
+    {
+        SaveSystem.savePlayer();
+        returnToMain();
     }
 }
