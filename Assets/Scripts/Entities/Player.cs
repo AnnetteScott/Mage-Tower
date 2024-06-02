@@ -45,7 +45,8 @@ public class Player : Entity
 
     void Start()
     {
-        if(GlobalData.playerMaxHealth == 0)
+
+        if (GlobalData.playerMaxHealth == 0)
         {
             GlobalData.playerMaxHealth = maxHealth;
             GlobalData.playerMaxMana = maxMana;
@@ -65,10 +66,12 @@ public class Player : Entity
         rigidBody.freezeRotation = true;
         mana = maxMana;
         updateGUI();
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
 
         power = GlobalData.playerPower;
         armour = GlobalData.playerArmour;
+
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
     }
 
     void FixedUpdate()
@@ -263,7 +266,7 @@ public class Player : Entity
             hitting = false;
             GameObject enemy = collision.gameObject;
             enemy.GetComponent<Enemy>().takeDamage(damage);
-            audioManager.PlaySFX(audioManager.hit);
+            //audioManager.PlaySFX(audioManager.hit);
         }
     }
 
