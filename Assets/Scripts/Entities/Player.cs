@@ -15,7 +15,7 @@ public class Player : Entity
     public Collider2D feetCollider;
     public Collider2D bodyCollider;
     public SpriteRenderer playerSprite;
-    public float jumpHeight;
+    public float jumpHeight = 10.0f;
     public float walkingSpeed;
     public float runningSpeed;
     public float maxMana;
@@ -69,6 +69,7 @@ public class Player : Entity
         dash.Enable();
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.freezeRotation = true;
+        rigidBody.gravityScale = 3.0f;
         mana = maxMana;
         updateGUI();
 
@@ -131,7 +132,7 @@ public class Player : Entity
             //Player is jumping
             if (onGround && moveValue.y != 0.0f)
             {
-                rigidBody.velocity = new Vector2(moveValue.x * speed, jumpHeight);
+                rigidBody.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse);
             }
             else
             {
