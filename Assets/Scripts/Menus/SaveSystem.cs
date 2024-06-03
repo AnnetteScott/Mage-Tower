@@ -4,6 +4,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem
 {
+    /// <summary>
+    /// Loads the data from the SavedData class which gets it's data from the 
+    /// GlobalData class. Save it as a binary file.
+    /// </summary>
     public static void savePlayer()
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -17,6 +21,9 @@ public static class SaveSystem
         stream.Close();
     }
 
+    /// <summary>
+    /// Reads the binary file and loads the data back into the GlobalData class.
+    /// </summary>
     public static void loadPlayer()
     {
         string path = Application.persistentDataPath + "/player.mt";
