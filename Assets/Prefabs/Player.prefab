@@ -1223,6 +1223,7 @@ MonoBehaviour:
       m_Action: Mouse
       m_Flags: 0
     m_Flags: 0
+  PopUpLevelUpPrefeb: {fileID: 2336303339269453966, guid: f93771efeaea94122934bf78bc91baca, type: 3}
   isFlipped: 0
 --- !u!50 &1410061253463331633
 Rigidbody2D:

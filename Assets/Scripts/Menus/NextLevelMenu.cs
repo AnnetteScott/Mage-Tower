@@ -11,17 +11,25 @@ public class LevelMenu : MonoBehaviour
 
     private bool addXP = false;
 
+    AudioManager audioManager;
+
     // Update is called once per frame
     void Update () {
+        
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        Player player = players[0].GetComponent<Player>();
+        GlobalData.playerMaxHealth = player.maxHealth;
+        GlobalData.playerMaxMana = player.maxMana;
+        GlobalData.playerXP = player.getExperience();
+        GlobalData.playerLevel = player.getLevel();
  
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && GameObject.FindGameObjectsWithTag("Item").Length == 0)
         {
             if (!addXP)
             {
-                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
                 if (players.Length > 0)
                 {
-                    Player player = players[0].GetComponent<Player>();
                     player.addExperience(2);
                     GlobalData.playerMaxHealth = player.maxHealth;
                     GlobalData.playerMaxMana = player.maxMana;
@@ -39,6 +47,9 @@ public class LevelMenu : MonoBehaviour
     {
         levelMenuUI.SetActive(true);
         LevelIsNext = true;
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        audioManager.PlaySFX(audioManager.levelCompleted);
+
     }
 
     public void NextLevelButton ()

@@ -17,6 +17,7 @@ TagManager:
   - Torch
   - Crypt Door
   - Secret Passage
+  - Audio
   layers:
   - Default
   - TransparentFX

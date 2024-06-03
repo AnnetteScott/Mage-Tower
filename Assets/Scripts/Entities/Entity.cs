@@ -47,7 +47,7 @@ public class Entity : MonoBehaviour
     /// <returns>int of the remaining health</returns>
     public float takeDamage(float damage)
     {
-        float damageDone = damage - armour;
+        float damageDone = Mathf.Abs(damage) - armour;
         if(damageDone > 0)
         {
             health -= Mathf.Abs(damageDone);

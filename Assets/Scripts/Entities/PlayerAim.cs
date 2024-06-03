@@ -19,7 +19,10 @@ public class PlayerAim : MonoBehaviour
     private SpriteRenderer crystalRenderer;
 
     public Player playerScript;
-    private SpellSwap spellswap;
+    private SpellSwap spellSwap;
+
+    AudioManager audioManager;
+
 
     public event EventHandler<OnShootEventArgs> OnShoot;
     public class OnShootEventArgs : EventArgs {
@@ -28,10 +31,12 @@ public class PlayerAim : MonoBehaviour
     } 
     
     private void Awake() 
-    {        
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
         aimEndPointTransform = aimTransform.Find("endPointPosition");
         playerRenderer = GetComponent<SpriteRenderer>();
-        
+
         // Find the renderer of the staff
         staffTransform = aimTransform.Find("Staff");
         if (staffTransform != null)
@@ -44,8 +49,8 @@ public class PlayerAim : MonoBehaviour
             Debug.LogError("Staff transform not found as a child of Aim!");
         }
 
-        spellswap = FindObjectOfType<SpellSwap>();
-        if (spellswap == null) {
+        spellSwap = FindObjectOfType<SpellSwap>();
+        if (spellSwap == null) {
             Debug.LogError("SpellSwap reference is not set in the Inspector");
         }
     }
@@ -121,19 +126,23 @@ public class PlayerAim : MonoBehaviour
     }
 
     private void HandleShooting() {
-        //Get the current spell from SpellSwap
-        Transform currentSpell = spellswap.GetCurrentSpell();
+		//Get the current spell from SpellSwap
+		Transform currentSpell = spellSwap.GetCurrentSpell();
 
-        //Get the mana cost for the current spell
-        int manaCost = currentSpell.GetComponent<Bullet>().manaCost;
+		//Get the mana cost for the current spell
+		int manaCost = currentSpell.GetComponent<Bullet>().manaCost;
 
-        if(Input.GetMouseButtonDown(1) && playerScript.useMana(manaCost)) {
-            Vector3 mousePositionA = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePositionA.z = 0;
-            OnShoot?.Invoke(this, new OnShootEventArgs {
-                endPointPosition = aimEndPointTransform.position,
-                shootDirection = mousePositionA, // Passing the normalized shoot direction
-            });
-        }
-    }
+		if(Input.GetMouseButtonDown(1) && playerScript.useMana(manaCost)) 
+		{
+			audioManager.PlaySFX(audioManager.hit);
+
+			Vector3 mousePositionA = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			mousePositionA.z = 0;
+			OnShoot?.Invoke(this, new OnShootEventArgs {
+				endPointPosition = aimEndPointTransform.position,
+				shootDirection = mousePositionA, // Passing the normalized shoot direction
+			});
+
+		}
+	}
 }

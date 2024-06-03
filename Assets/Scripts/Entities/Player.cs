@@ -26,6 +26,7 @@ public class Player : Entity
     public InputAction mouse;
 	public KeyCode pickUpKeyCode = KeyCode.B;
 	public bool hasKey = false;
+    public GameObject PopUpLevelUpPrefeb;
 
     private float mana;
     private int experience;
@@ -45,9 +46,12 @@ public class Player : Entity
 
     public bool isFlipped = false;
 
+    AudioManager audioManager;
+
     void Start()
     {
-        if(GlobalData.playerMaxHealth == 0)
+
+        if (GlobalData.playerMaxHealth == 0)
         {
             GlobalData.playerMaxHealth = maxHealth;
             GlobalData.playerMaxMana = maxMana;
@@ -70,6 +74,9 @@ public class Player : Entity
 
         power = GlobalData.playerPower;
         armour = GlobalData.playerArmour;
+
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
     }
 
     void FixedUpdate()
@@ -212,6 +219,7 @@ public class Player : Entity
         if (currentLevel != newLevel)
         {
             levelUp();
+            
         }
     }
 
@@ -224,6 +232,8 @@ public class Player : Entity
         setHealthToMax();
         this.maxMana += 2;
         mana = maxMana;
+        audioManager.PlaySFX(audioManager.levelUp);
+        Instantiate(PopUpLevelUpPrefeb, transform.position, Quaternion.identity);
     }
 
     public int getExperience()
@@ -247,6 +257,7 @@ public class Player : Entity
 
     public void killedEnemy()
     {
+        audioManager.PlaySFX(audioManager.EnemyDead);
         addExperience(3);
         addHealth(2);
         mana += 2;
@@ -254,7 +265,6 @@ public class Player : Entity
         {
             mana = maxMana;
         }
-
         updateGUI();
     }
 
@@ -269,6 +279,7 @@ public class Player : Entity
         {
             GlobalData.inventory.Add(collision.gameObject.name.Replace("(Clone)", ""));
             Destroy(collision.gameObject);
+            audioManager.PlaySFX(audioManager.ItemCollect);
         }
 
 		if (collision.gameObject.CompareTag("Block"))
@@ -288,6 +299,7 @@ public class Player : Entity
             hitting = false;
             GameObject enemy = collision.gameObject;
             enemy.GetComponent<Enemy>().takeDamage(damage);
+            
         }
     }
 
@@ -322,4 +334,6 @@ public class Player : Entity
             onGround = false;
         }
     }
+
+  
 }
