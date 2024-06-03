@@ -2,8 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEditor.UIElements.ToolbarMenu;
 
 public class Inventory : MonoBehaviour, IPointerDownHandler
 {
