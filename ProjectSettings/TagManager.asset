@@ -11,6 +11,8 @@ TagManager:
   - Spark
   - Item
   - StaffCrystal
+  - LevelCanvas
+  - Audio
   layers:
   - Default
   - TransparentFX
