@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Weapon
   - Projectile
+  - Spark
   - Item
   - StaffCrystal
   - LevelCanvas
@@ -20,10 +21,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Fire Spark
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 
@@ -52,4 +53,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: FireSpark Layer
+    uniqueID: 1646417805
     locked: 0
