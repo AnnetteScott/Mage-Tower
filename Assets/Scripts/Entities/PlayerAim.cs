@@ -19,6 +19,7 @@ public class PlayerAim : MonoBehaviour
     private SpriteRenderer crystalRenderer;
 
     public Player playerScript;
+    private SpellSwap spellSwap;
 
     AudioManager audioManager;
 
@@ -27,7 +28,6 @@ public class PlayerAim : MonoBehaviour
     public class OnShootEventArgs : EventArgs {
         public Vector3 endPointPosition;
         public Vector3 shootDirection;
-
     } 
     
     private void Awake() 
@@ -49,7 +49,10 @@ public class PlayerAim : MonoBehaviour
             Debug.LogError("Staff transform not found as a child of Aim!");
         }
 
-
+        spellSwap = FindObjectOfType<SpellSwap>();
+        if (spellSwap == null) {
+            Debug.LogError("SpellSwap reference is not set in the Inspector");
+        }
     }
 
     //The Mathf section makes sure the aim angle makes sense in 2D
@@ -123,15 +126,23 @@ public class PlayerAim : MonoBehaviour
     }
 
     private void HandleShooting() {
-        if(Input.GetMouseButtonDown(1) && playerScript.useMana(2)) {
-            audioManager.PlaySFX(audioManager.hit);
+		//Get the current spell from SpellSwap
+		Transform currentSpell = spellSwap.GetCurrentSpell();
 
-            Vector3 mousePositionA = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            OnShoot?.Invoke(this, new OnShootEventArgs {
-                endPointPosition = aimEndPointTransform.position,
-                shootDirection = mousePositionA, // Passing the normalized shoot direction
-            });
+		//Get the mana cost for the current spell
+		int manaCost = currentSpell.GetComponent<Bullet>().manaCost;
 
-        }
-    }
+		if(Input.GetMouseButtonDown(1) && playerScript.useMana(manaCost)) 
+		{
+			audioManager.PlaySFX(audioManager.hit);
+
+			Vector3 mousePositionA = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			mousePositionA.z = 0;
+			OnShoot?.Invoke(this, new OnShootEventArgs {
+				endPointPosition = aimEndPointTransform.position,
+				shootDirection = mousePositionA, // Passing the normalized shoot direction
+			});
+
+		}
+	}
 }
