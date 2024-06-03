@@ -20,6 +20,9 @@ public class PlayerAim : MonoBehaviour
 
     public Player playerScript;
 
+    AudioManager audioManager;
+
+
     public event EventHandler<OnShootEventArgs> OnShoot;
     public class OnShootEventArgs : EventArgs {
         public Vector3 endPointPosition;
@@ -28,10 +31,12 @@ public class PlayerAim : MonoBehaviour
     } 
     
     private void Awake() 
-    {        
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
         aimEndPointTransform = aimTransform.Find("endPointPosition");
         playerRenderer = GetComponent<SpriteRenderer>();
-        
+
         // Find the renderer of the staff
         staffTransform = aimTransform.Find("Staff");
         if (staffTransform != null)
@@ -43,6 +48,8 @@ public class PlayerAim : MonoBehaviour
         {
             Debug.LogError("Staff transform not found as a child of Aim!");
         }
+
+
     }
 
     //The Mathf section makes sure the aim angle makes sense in 2D
@@ -117,11 +124,14 @@ public class PlayerAim : MonoBehaviour
 
     private void HandleShooting() {
         if(Input.GetMouseButtonDown(1) && playerScript.useMana(2)) {
+            audioManager.PlaySFX(audioManager.hit);
+
             Vector3 mousePositionA = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             OnShoot?.Invoke(this, new OnShootEventArgs {
                 endPointPosition = aimEndPointTransform.position,
                 shootDirection = mousePositionA, // Passing the normalized shoot direction
             });
+
         }
     }
 }

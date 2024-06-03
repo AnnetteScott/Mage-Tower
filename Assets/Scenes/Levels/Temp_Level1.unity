@@ -1303,7 +1303,7 @@ GameObject:
   - component: {fileID: 662858488}
   m_Layer: 0
   m_Name: AudioManager
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1340,10 +1340,11 @@ MonoBehaviour:
   musicSource: {fileID: 1748638775}
   SFXSource: {fileID: 847683367}
   background: {fileID: 8300000, guid: c889d5c82332949bbb7a6b53827ce3a3, type: 3}
-  levelCompleted: {fileID: 0}
+  levelCompleted: {fileID: 8300000, guid: 3237435d2f09d412ab04c04f9f316269, type: 3}
   levelUp: {fileID: 8300000, guid: 3237435d2f09d412ab04c04f9f316269, type: 3}
   hit: {fileID: 8300000, guid: fc877c80d2f894eac95e0af3ef37886b, type: 3}
-  mouseClick: {fileID: 0}
+  EnemyDead: {fileID: 8300000, guid: 108cba96604f644b49909c49ea32d9fc, type: 3}
+  ItemCollect: {fileID: 8300000, guid: 2a66ebad318644bafa4d21f2b28a2045, type: 3}
 --- !u!1 &847683365
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,7 +1388,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2971,7 +2972,8 @@ MonoBehaviour:
   levelCompleted: {fileID: 0}
   levelUp: {fileID: 0}
   hit: {fileID: 0}
-  mouseClick: {fileID: 0}
+  EnemyDead: {fileID: 0}
+  ItemCollect: {fileID: 0}
 --- !u!1 &1679775096
 GameObject:
   m_ObjectHideFlags: 0
@@ -3162,7 +3164,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

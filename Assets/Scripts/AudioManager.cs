@@ -14,7 +14,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip levelCompleted;
     public AudioClip levelUp;
     public AudioClip hit;
-    public AudioClip mouseClick;
+    public AudioClip EnemyDead;
+    public AudioClip ItemCollect;
 
     private void Start()
     {

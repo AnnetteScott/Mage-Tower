@@ -234,6 +234,7 @@ public class Player : Entity
 
     public void killedEnemy()
     {
+        audioManager.PlaySFX(audioManager.EnemyDead);
         addExperience(3);
         addHealth(2);
         mana += 2;
@@ -241,7 +242,6 @@ public class Player : Entity
         {
             mana = maxMana;
         }
-
         updateGUI();
     }
 
@@ -252,6 +252,7 @@ public class Player : Entity
         {
             GlobalData.inventory.Add(collision.gameObject.name.Replace("(Clone)", ""));
             Destroy(collision.gameObject);
+            audioManager.PlaySFX(audioManager.ItemCollect);
         }
     }
 
@@ -266,7 +267,7 @@ public class Player : Entity
             hitting = false;
             GameObject enemy = collision.gameObject;
             enemy.GetComponent<Enemy>().takeDamage(damage);
-            //audioManager.PlaySFX(audioManager.hit);
+            
         }
     }
 
