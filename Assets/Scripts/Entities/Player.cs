@@ -24,6 +24,7 @@ public class Player : Entity
     public InputAction dash;
     public InputAction run;
     public InputAction mouse;
+    public GameObject PopUpLevelUpPrefeb;
 
     private float mana;
     private int experience;
@@ -192,6 +193,7 @@ public class Player : Entity
         if (currentLevel != newLevel)
         {
             levelUp();
+            
         }
     }
 
@@ -204,6 +206,8 @@ public class Player : Entity
         setHealthToMax();
         this.maxMana += 2;
         mana = maxMana;
+        Instantiate(PopUpLevelUpPrefeb, transform.position, Quaternion.identity);
+
     }
 
     public int getExperience()
