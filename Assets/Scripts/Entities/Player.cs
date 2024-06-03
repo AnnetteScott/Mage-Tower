@@ -15,7 +15,7 @@ public class Player : Entity
     public Collider2D feetCollider;
     public Collider2D bodyCollider;
     public SpriteRenderer playerSprite;
-    public float jumpHeight = 10.0f;
+    public float jumpHeight;
     public float walkingSpeed;
     public float runningSpeed;
     public float maxMana;
