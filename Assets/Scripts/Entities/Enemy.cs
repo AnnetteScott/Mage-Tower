@@ -82,7 +82,7 @@ public class Enemy : Entity
 
         if (collision.gameObject.CompareTag("Projectile"))
         {
-            takeDamage(collision.gameObject.GetComponent<Bullet>().damage);
+            takeDamage(collision.gameObject.GetComponent<Bullet>().getDamage());
             Destroy(collision.gameObject);
         }
     }
