@@ -49,9 +49,9 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
     private void displayInventoryItems()
     {
         //Clear all items
-        for(int i = 0; i < InventorySlots.transform.childCount; i++)
+        for (int i = 0; i < InventorySlots.transform.childCount; i++)
         {
-            if(InventorySlots.transform.GetChild(i).childCount > 0)
+            if (InventorySlots.transform.GetChild(i).childCount > 0)
             {
                 Destroy(InventorySlots.transform.GetChild(i).GetChild(0).gameObject);
             }
@@ -81,7 +81,7 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
             index++;
         }
 
-        if(GlobalData.equippedStaffItem != null)
+        if (GlobalData.equippedStaffItem != null)
         {
             var resource = Resources.Load(GlobalData.equippedStaffItem);
             GameObject newInstance = Instantiate(resource) as GameObject;
@@ -90,7 +90,7 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
             staffCrystal.sprite = (Sprite)Resources.Load("Staff Crystal - " + variant, typeof(Sprite));
         }
 
-        if(GlobalData.equippedArmourItem != null)
+        if (GlobalData.equippedArmourItem != null)
         {
             var resource = Resources.Load(GlobalData.equippedArmourItem);
             GameObject newInstance = Instantiate(resource) as GameObject;
@@ -116,19 +116,19 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
         {
             string armourVariant = GlobalData.equippedArmourItem.Replace(" Variant", "").Split(" - ")[1];
             player.GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("Player - " + armourVariant, typeof(Sprite));
-        }  
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if(clickedItem != null)
+        if (clickedItem != null)
         {
             Image slotImage = clickedItem.transform.parent.gameObject.GetComponent<Image>();
             slotImage.color = Color.white;
         }
 
         GameObject gameObject = eventData.pointerCurrentRaycast.gameObject;
-        if(gameObject.CompareTag("Item"))
+        if (gameObject.CompareTag("Item"))
         {
             clickedItem = gameObject;
             Image slotImage = clickedItem.transform.parent.gameObject.GetComponent<Image>();
@@ -161,16 +161,16 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
     /// </summary>
     public void equip()
     {
-        if(!clickedItem)
+        if (!clickedItem)
         {
             return;
         }
 
         string name = clickedItem.name.Replace("(Clone)", "");
         string variant = name.Replace(" Variant", "").Split(" - ")[1];
-        if(clickedItem.GetComponent<Weapon>() != null)
+        if (clickedItem.GetComponent<Weapon>() != null)
         {
-            if(staffSlot.transform.childCount > 0)
+            if (staffSlot.transform.childCount > 0)
             {
                 GameObject item = staffSlot.transform.GetChild(0).gameObject;
                 GlobalData.inventory.Add(item.name.Replace("(Clone)", ""));
@@ -182,9 +182,9 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
             player.GetComponent<Player>().power = power;
 
         }
-        else if(clickedItem.GetComponent<Armour>() != null)
+        else if (clickedItem.GetComponent<Armour>() != null)
         {
-            if(amourSlot.transform.childCount > 0)
+            if (amourSlot.transform.childCount > 0)
             {
                 GameObject item = amourSlot.transform.GetChild(0).gameObject;
                 GlobalData.inventory.Add(item.name.Replace("(Clone)", ""));
@@ -195,7 +195,15 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
             GlobalData.playerArmour = armour;
             player.GetComponent<Player>().armour = armour;
         }
-
+        else if (name == "Key" || name == "Hammer")
+        {
+            // Handle puzzle items
+            GlobalData.inventory.Remove(name);
+            if (name == "Key")
+            {
+                player.GetComponent<Player>().hasKey = true;
+            }
+        }
 
         GlobalData.inventory.Remove(name);
         displayInventoryItems();

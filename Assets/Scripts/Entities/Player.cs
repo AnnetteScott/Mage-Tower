@@ -24,16 +24,20 @@ public class Player : Entity
     public InputAction dash;
     public InputAction run;
     public InputAction mouse;
-	public KeyCode pickUpKeyCode = KeyCode.B;
-	public bool hasKey = false;
+    public KeyCode pickUpKeyCode = KeyCode.B;
+    public KeyCode interactKeyCode = KeyCode.E;
+    public KeyCode useKeyCode = KeyCode.Q;
+    public bool hasKey = false;
 
     private float mana;
     private int experience;
     private Rigidbody2D rigidBody;
     private bool onGround = false;
     private bool hitting = false;
-	private GameObject carriedBlock = null;
-	private GameObject playerNearbyBlock = null;
+    private GameObject carriedBlock = null;
+    private GameObject playerNearbyBlock = null;
+    public float pushPower = 2.0f;
+    private GameObject playerNearbyPuzzleItem;
 
     private float hittingTimer = 0;
     private float dashingTimer = 0;
@@ -47,7 +51,7 @@ public class Player : Entity
 
     void Start()
     {
-        if(GlobalData.playerMaxHealth == 0)
+        if (GlobalData.playerMaxHealth == 0)
         {
             GlobalData.playerMaxHealth = maxHealth;
             GlobalData.playerMaxMana = maxMana;
@@ -72,13 +76,13 @@ public class Player : Entity
         armour = GlobalData.playerArmour;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         movePlayer();
         attack();
         updateGUI();
 
-		if (Input.GetKeyDown(pickUpKeyCode))
+        if (Input.GetKeyDown(pickUpKeyCode))
         {
             if (carriedBlock == null && playerNearbyBlock != null)
             {
@@ -93,11 +97,60 @@ public class Player : Entity
                 carriedBlock = null;
             }
         }
+
+        if (Input.GetKeyDown(interactKeyCode))
+        {
+            if (playerNearbyPuzzleItem != null)
+            {
+                Debug.Log("Interacting with: " + playerNearbyPuzzleItem.name);
+                playerNearbyPuzzleItem.GetComponent<PuzzleItem>().Interact();
+            }
+        }
+
+        if (Input.GetKeyDown(useKeyCode))
+        {
+            UseKey();
+        }
     }
 
-    /// <summary>
-    /// Apply movement to the player
-    /// </summary>
+    private void UseKey()
+    {
+        if (hasKey && playerNearbyPuzzleItem != null && playerNearbyPuzzleItem.CompareTag("CryptDoor"))
+        {
+            playerNearbyPuzzleItem.GetComponent<PuzzleItem>().Unlock();
+            hasKey = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            GlobalData.inventory.Add(collision.gameObject.name.Replace("(Clone)", ""));
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Block"))
+        {
+            playerNearbyBlock = collision.gameObject;
+        }
+
+        if (collision.gameObject.CompareTag("PuzzleItem"))
+        {
+            playerNearbyPuzzleItem = collision.gameObject;
+            Debug.Log("Nearby puzzle item detected: " + playerNearbyPuzzleItem.name);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("PuzzleItem"))
+        {
+            playerNearbyPuzzleItem = null;
+            Debug.Log("Puzzle item exited: " + collision.gameObject.name);
+        }
+    }
+
     private void movePlayer()
     {
         float speed = walkingSpeed;
@@ -113,7 +166,7 @@ public class Player : Entity
             rigidBody.velocity = new Vector2(isDashingRight ? -dashingSpeed : dashingSpeed, 0);
             useMana(dashingManaUse);
         }
-        else if(dashingTimer > dashingTimeout - dashingTimelimit)
+        else if (dashingTimer > dashingTimeout - dashingTimelimit)
         {
             rigidBody.velocity = new Vector2(isDashingRight ? -dashingSpeed : dashingSpeed, 0);
         }
@@ -121,7 +174,6 @@ public class Player : Entity
         {
             Vector2 moveValue = move.ReadValue<Vector2>();
 
-            //Player is jumping
             if (onGround && moveValue.y != 0.0f)
             {
                 rigidBody.velocity = new Vector2(moveValue.x * speed, jumpHeight);
@@ -130,7 +182,6 @@ public class Player : Entity
             {
                 rigidBody.velocity = new Vector2(moveValue.x * speed, rigidBody.velocity.y);
             }
-
         }
         else if (onGround)
         {
@@ -141,7 +192,7 @@ public class Player : Entity
             rigidBody.velocity = new Vector2(0, rigidBody.velocity.y);
         }
 
-        if(dashingTimer > 0)
+        if (dashingTimer > 0)
         {
             dashingTimer -= Time.deltaTime;
         }
@@ -151,9 +202,6 @@ public class Player : Entity
         }
     }
 
-    /// <summary>
-    /// Swing the staff
-    /// </summary>
     private void attack()
     {
         if (mouse.IsPressed() && hittingTimer <= 0)
@@ -175,14 +223,9 @@ public class Player : Entity
         }
     }
 
-    /// <summary>
-    /// Use mana if the player has enough
-    /// </summary>
-    /// <param name="manaUsed"></param>
-    /// <returns>true if the mana was used, false otherwise</returns>
     public Boolean useMana(float manaUsed)
     {
-        if(mana - manaUsed >= 0) 
+        if (mana - manaUsed >= 0)
         {
             mana -= manaUsed;
             return true;
@@ -190,19 +233,11 @@ public class Player : Entity
         return false;
     }
 
-    /// <summary>
-    /// Calculates the level of the entity
-    /// </summary>
-    /// <returns>int of the entities current level</returns>
     public int getLevel()
     {
         return Mathf.Max(Mathf.FloorToInt(Mathf.Sqrt(this.experience)), 1);
     }
 
-    /// <summary>
-    /// Add experience to the total
-    /// </summary>
-    /// <param name="experience"></param>
     public void addExperience(int experience)
     {
         int currentLevel = getLevel();
@@ -215,9 +250,6 @@ public class Player : Entity
         }
     }
 
-    /// <summary>
-    /// Level up the entity
-    /// </summary>
     private void levelUp()
     {
         this.maxHealth += 2;
@@ -250,7 +282,7 @@ public class Player : Entity
         addExperience(3);
         addHealth(2);
         mana += 2;
-        if(mana > maxMana)
+        if (mana > maxMana)
         {
             mana = maxMana;
         }
@@ -258,29 +290,11 @@ public class Player : Entity
         updateGUI();
     }
 
-	public void pickUpKey()
+    public void pickUpKey()
     {
         hasKey = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Item"))
-        {
-            GlobalData.inventory.Add(collision.gameObject.name.Replace("(Clone)", ""));
-            Destroy(collision.gameObject);
-        }
-
-		if (collision.gameObject.CompareTag("Block"))
-        {
-            playerNearbyBlock = collision.gameObject;
-        }
-    }
-
-    /// <summary>
-    /// If the staff hits an enemy and the player has swang, do damage to the enemy
-    /// </summary>
-    /// <param name="collision"></param>
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") && hitting)
@@ -291,18 +305,6 @@ public class Player : Entity
         }
     }
 
-	private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Block"))
-        {
-            playerNearbyBlock = null;
-        }
-    }
-
-    /// <summary>
-    /// Check if the player is on the ground
-    /// </summary>
-    /// <param name="collision"></param>
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground") && feetCollider.IsTouching(collision.collider))
@@ -311,10 +313,6 @@ public class Player : Entity
         }
     }
 
-    /// <summary>
-    /// Check if the player is no longer on the ground
-    /// </summary>
-    /// <param name="collision"></param>
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))

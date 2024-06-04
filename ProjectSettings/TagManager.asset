@@ -17,6 +17,10 @@ TagManager:
   - Torch
   - Crypt Door
   - Secret Passage
+  - PuzzleItem
+  - BlockOfIce
+  - MovableBox
+  - MovableBlock
   layers:
   - Default
   - TransparentFX

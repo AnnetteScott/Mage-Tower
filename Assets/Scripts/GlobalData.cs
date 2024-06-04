@@ -13,4 +13,11 @@ public static class GlobalData
     public static float playerPower = 1;
     public static float playerArmour;
     public static ArrayList inventory = new ArrayList();
+    public static bool[] puzzlesCompleted = new bool[5]; 
+
+    public static bool level1PuzzleCompleted;
+    public static bool level3PuzzleCompleted;
+    public static bool level5PuzzleCompleted;
+    public static bool level7PuzzleCompleted;
+    public static bool level9PuzzleCompleted;
 }

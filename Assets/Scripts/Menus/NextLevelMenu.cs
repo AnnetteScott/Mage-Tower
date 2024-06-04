@@ -5,16 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class LevelMenu : MonoBehaviour
 {
-
     public static bool LevelIsNext = false;
     public GameObject levelMenuUI;
 
     private bool addXP = false;
 
     // Update is called once per frame
-    void Update () {
- 
-        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && GameObject.FindGameObjectsWithTag("Item").Length == 0)
+    void Update()
+    {
+        if (AllEnemiesDefeated() && AllPuzzlesCompleted())
         {
             if (!addXP)
             {
@@ -29,25 +28,42 @@ public class LevelMenu : MonoBehaviour
                 }
                 addXP = true;
             }
-            
 
             Next();
         }
     }
 
-    void Next ()
+    private bool AllEnemiesDefeated()
+    {
+        return GameObject.FindGameObjectsWithTag("Enemy").Length == 0;
+    }
+
+    private bool AllPuzzlesCompleted()
+    {
+        PuzzleItem[] puzzles = FindObjectsOfType<PuzzleItem>();
+        foreach (PuzzleItem puzzle in puzzles)
+        {
+            if (!puzzle.IsCompleted)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    void Next()
     {
         levelMenuUI.SetActive(true);
         LevelIsNext = true;
     }
 
-    public void NextLevelButton ()
+    public void NextLevelButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         LevelIsNext = false;
     }
 
-    public void returnToMainNext ()
+    public void returnToMainNext()
     {
         SceneManager.LoadScene(0);
         LevelIsNext = false;
