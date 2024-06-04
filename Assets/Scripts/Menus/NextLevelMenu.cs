@@ -11,8 +11,6 @@ public class LevelMenu : MonoBehaviour
 
     private bool addXP = false;
 
-    AudioManager audioManager;
-
     // Update is called once per frame
     void Update () {
         
@@ -47,15 +45,13 @@ public class LevelMenu : MonoBehaviour
     {
         levelMenuUI.SetActive(true);
         LevelIsNext = true;
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-        audioManager.PlaySFX(audioManager.levelCompleted);
-
     }
 
     public void NextLevelButton ()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         LevelIsNext = false;
+        GlobalData.currentSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
     }
 
     public void returnToMainNext ()
