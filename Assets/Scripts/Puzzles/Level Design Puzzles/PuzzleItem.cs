@@ -15,9 +15,9 @@ public class PuzzleItem : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && !isSolved)
         {
             Player player = collision.gameObject.GetComponent<Player>();
-            if (player != null && player.AreAllEnemiesDefeated())
+            if (player != null)
             {
-                Debug.Log("Player and enemies defeated detected");
+                Debug.Log("Player detected");
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     Debug.Log("E key pressed for puzzle interaction");
@@ -25,7 +25,7 @@ public class PuzzleItem : MonoBehaviour
                     {
                         case PuzzleType.Key:
                             Debug.Log("Interacting with Key");
-                            player.PickUpKey();
+                            player.AddToInventory("Key");
                             isSolved = true;
                             player.addExperience(rewardXP);
                             Destroy(gameObject);
@@ -61,5 +61,14 @@ public class PuzzleItem : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SolvePuzzle()
+    {
+        isSolved = true;
+        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player.addExperience(rewardXP);
+        Destroy(linkedObject);
+        Destroy(gameObject);
     }
 }

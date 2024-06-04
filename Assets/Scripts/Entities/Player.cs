@@ -33,8 +33,10 @@ public class Player : Entity
     private Rigidbody2D rigidBody;
     private bool onGround = false;
     private bool hitting = false;
-    private GameObject carriedBlock = null;
     private GameObject playerNearbyBlock = null;
+    public GameObject carriedBlock = null;
+    public GameObject keyItem = null;
+
 
     private float hittingTimer = 0;
     private float dashingTimer = 0;
@@ -88,39 +90,10 @@ public class Player : Entity
         }
     }
 
-    public void PickUpKey()
+     public void AddToInventory(string itemName)
     {
-        hasKey = true;
-        GlobalData.inventory.Add("Key");
-        Debug.Log("Key picked up and added to inventory");
-    }
-
-    public void CarryBlock(GameObject block)
-    {
-        if (carriedBlock == null)
-        {
-            carriedBlock = block;
-            block.transform.SetParent(transform);
-            block.transform.localPosition = Vector3.zero;
-        }
-        else
-        {
-            carriedBlock.transform.SetParent(null);
-            carriedBlock = null;
-        }
-    }
-
-    public void BreakIce(GameObject iceBlock)
-    {
-        // Implement logic to break the ice block
-        Destroy(iceBlock);
-    }
-
-    public bool HasItem(string itemName)
-    {
-        bool hasItem = GlobalData.inventory.Contains(itemName);
-        Debug.Log("Checking for item: " + itemName + " - Has item: " + hasItem);
-        return hasItem;
+        GlobalData.inventory.Add(itemName);
+        Debug.Log(itemName + " added to inventory");
     }
 
     public void UseItem(string itemName)
@@ -136,6 +109,36 @@ public class Player : Entity
         }
     }
 
+    public bool HasItem(string itemName)
+    {
+        bool hasItem = GlobalData.inventory.Contains(itemName);
+        Debug.Log("Checking for item: " + itemName + " - Has item: " + hasItem);
+        return hasItem;
+    }
+
+    public void CarryBlock(GameObject block)
+    {
+        if (carriedBlock == null)
+        {
+            carriedBlock = block;
+            block.transform.SetParent(transform);
+            block.transform.localPosition = Vector3.zero;
+            Debug.Log("Block picked up");
+        }
+        else
+        {
+            carriedBlock.transform.SetParent(null);
+            carriedBlock = null;
+            Debug.Log("Block dropped");
+        }
+    }
+
+    public void BreakIce(GameObject iceBlock)
+    {
+        // Implement logic to break the ice block
+        Destroy(iceBlock);
+    }
+
     public bool AreAllEnemiesDefeated()
     {
         bool allEnemiesDefeated = GameObject.FindGameObjectsWithTag("Enemy").Length == 0;
@@ -143,29 +146,12 @@ public class Player : Entity
         return allEnemiesDefeated;
     }
 
-
     // Update FixedUpdate method to check for interaction input
     void FixedUpdate()
     {
         movePlayer();
         attack();
         updateGUI();
-
-        if (Input.GetKeyDown(pickUpKeyCode))
-        {
-            if (carriedBlock == null && playerNearbyBlock != null)
-            {
-                // Pick up the block
-                playerNearbyBlock.GetComponent<BlockInteraction>().PickUp();
-                carriedBlock = playerNearbyBlock;
-            }
-            else if (carriedBlock != null)
-            {
-                // Drop the block
-                carriedBlock.GetComponent<BlockInteraction>().Drop();
-                carriedBlock = null;
-            }
-        }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -176,10 +162,23 @@ public class Player : Entity
                 if (puzzleItem != null)
                 {
                     // Interact with the puzzle item
+                    if (puzzleItem.puzzleType == PuzzleItem.PuzzleType.Block)
+                    {
+                        CarryBlock(puzzleItem.gameObject);
+                    }
+                    else if (puzzleItem.puzzleType == PuzzleItem.PuzzleType.CryptDoor)
+                    {
+                        if (HasItem("Key"))
+                        {
+                            UseItem("Key");
+                            puzzleItem.SolvePuzzle();
+                        }
+                    }
                 }
             }
         }
     }
+
 
     /// <summary>
     /// Apply movement to the player
