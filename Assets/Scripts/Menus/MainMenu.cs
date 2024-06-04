@@ -20,4 +20,11 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
+
+    public void Continue()
+    {
+        SaveSystem.loadPlayer();
+        SceneManager.LoadScene(GlobalData.currentSceneIndex);
+        Time.timeScale = 1f;
+    }
 }

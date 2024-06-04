@@ -56,6 +56,7 @@ public class LevelMenu : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         LevelIsNext = false;
+        GlobalData.currentSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
     }
 
     public void returnToMainNext ()
