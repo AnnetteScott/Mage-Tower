@@ -15,7 +15,7 @@ public class Player : Entity
     public Collider2D feetCollider;
     public Collider2D bodyCollider;
     public SpriteRenderer playerSprite;
-    public float jumpHeight = 10.0f;
+    public float jumpHeight;
     public float walkingSpeed;
     public float runningSpeed;
     public float maxMana;
@@ -24,6 +24,8 @@ public class Player : Entity
     public InputAction dash;
     public InputAction run;
     public InputAction mouse;
+	public KeyCode pickUpKeyCode = KeyCode.B;
+	public bool hasKey = false;
     public GameObject PopUpLevelUpPrefeb;
 
     private float mana;
@@ -31,8 +33,10 @@ public class Player : Entity
     private Rigidbody2D rigidBody;
     private bool onGround = false;
     private bool hitting = false;
-    private float hittingTimer = 0;
+	private GameObject carriedBlock = null;
+	private GameObject playerNearbyBlock = null;
 
+    private float hittingTimer = 0;
     private float dashingTimer = 0;
     private float dashingTimeout = 1f;
     private float dashingTimelimit = 0.1f;
@@ -81,6 +85,22 @@ public class Player : Entity
         movePlayer();
         attack();
         updateGUI();
+
+		if (Input.GetKeyDown(pickUpKeyCode))
+        {
+            if (carriedBlock == null && playerNearbyBlock != null)
+            {
+                // Pick up the block
+                playerNearbyBlock.GetComponent<BlockInteraction>().PickUp();
+                carriedBlock = playerNearbyBlock;
+            }
+            else if (carriedBlock != null)
+            {
+                // Drop the block
+                carriedBlock.GetComponent<BlockInteraction>().Drop();
+                carriedBlock = null;
+            }
+        }
     }
 
     /// <summary>
@@ -249,6 +269,10 @@ public class Player : Entity
         updateGUI();
     }
 
+	public void pickUpKey()
+    {
+        hasKey = true;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -257,6 +281,11 @@ public class Player : Entity
             GlobalData.inventory.Add(collision.gameObject.name.Replace("(Clone)", ""));
             Destroy(collision.gameObject);
             audioManager.PlaySFX(audioManager.ItemCollect);
+        }
+
+		if (collision.gameObject.CompareTag("Block"))
+        {
+            playerNearbyBlock = collision.gameObject;
         }
     }
 
@@ -272,6 +301,14 @@ public class Player : Entity
             GameObject enemy = collision.gameObject;
             enemy.GetComponent<Enemy>().takeDamage(damage);
             
+        }
+    }
+
+	private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Block"))
+        {
+            playerNearbyBlock = null;
         }
     }
 

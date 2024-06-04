@@ -12,6 +12,11 @@ TagManager:
   - Item
   - StaffCrystal
   - LevelCanvas
+  - Key
+  - Block
+  - Torch
+  - Crypt Door
+  - Secret Passage
   - Audio
   layers:
   - Default
