@@ -13,5 +13,6 @@ public static class GlobalData
     public static string equippedArmourItem;
     public static float playerPower = 1;
     public static float playerArmour;
+    public static int currentSceneIndex = 0;
     public static ArrayList inventory = new ArrayList();
 }
