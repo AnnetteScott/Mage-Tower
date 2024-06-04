@@ -40,12 +40,14 @@ public class SpellSwap : MonoBehaviour
                 currentSpell = MagicBullet;
                 staffCrystal.sprite = magicStaffSprite;
                 Debug.Log("Switched to Magic Bullet");
+                TestSwitch(KeyCode.Alpha1); // Call TestSwitch after switching to different spell
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 currentSpell = BouncyBullet;
                 staffCrystal.sprite = bouncyStaffSprite;
                 Debug.Log("Switched to Bouncy Bullet");
+                TestSwitch(KeyCode.Alpha2); // Call TestSwitch after switching to different spell
             }
 
             //Check if the player has reached level 3 and unlocked fire spark
@@ -55,10 +57,43 @@ public class SpellSwap : MonoBehaviour
                     currentSpell = FireSpark;
                     staffCrystal.sprite = fireStaffSprite;
                     Debug.Log("Switched to Fire Spark");
+                    TestSwitch(KeyCode.Alpha3); // Call TestSwitch after switching to different spell
                 }
             }
         } 
     }
+
+    private void TestSwitch(KeyCode key)
+    {
+        switch (key)
+        {
+            case KeyCode.Alpha1:
+                if (currentSpell == MagicBullet && staffCrystal.sprite == magicStaffSprite) {
+                    Debug.Log("All tests passed");
+                } else {
+                    Debug.Log("Test failed");
+                }
+                break;
+            case KeyCode.Alpha2:
+                if (currentSpell == BouncyBullet && staffCrystal.sprite == bouncyStaffSprite) {
+                    Debug.Log("All tests passed");
+                } else {
+                    Debug.Log("Test failed");
+                }
+                break;
+            case KeyCode.Alpha3:
+                if (currentSpell == FireSpark && staffCrystal.sprite == fireStaffSprite) {
+                    Debug.Log("All tests passed");
+                } else {
+                    Debug.Log("Test failed");
+                }
+                break;
+            default:
+                Debug.Log("Invalid key pressed for testing");
+                break;
+        }
+    }
+
 
     public Transform GetCurrentSpell()
     {
