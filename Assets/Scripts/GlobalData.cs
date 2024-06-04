@@ -15,4 +15,5 @@ public static class GlobalData
     public static float playerArmour;
     public static int currentSceneIndex = 0;
     public static ArrayList inventory = new ArrayList();
+    public static Dictionary<string, bool> puzzleStates = new Dictionary<string, bool>();
 }

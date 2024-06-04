@@ -24,8 +24,8 @@ public class Player : Entity
     public InputAction dash;
     public InputAction run;
     public InputAction mouse;
-	public KeyCode pickUpKeyCode = KeyCode.B;
-	public bool hasKey = false;
+    public KeyCode pickUpKeyCode = KeyCode.B;
+    public bool hasKey = false;
     public GameObject PopUpLevelUpPrefeb;
 
     private float mana;
@@ -33,8 +33,8 @@ public class Player : Entity
     private Rigidbody2D rigidBody;
     private bool onGround = false;
     private bool hitting = false;
-	private GameObject carriedBlock = null;
-	private GameObject playerNearbyBlock = null;
+    private GameObject carriedBlock = null;
+    private GameObject playerNearbyBlock = null;
 
     private float hittingTimer = 0;
     private float dashingTimer = 0;
@@ -80,13 +80,78 @@ public class Player : Entity
 
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("E key pressed");
+        }
+    }
+
+    public void PickUpKey()
+    {
+        hasKey = true;
+        GlobalData.inventory.Add("Key");
+        Debug.Log("Key picked up and added to inventory");
+    }
+
+    public void CarryBlock(GameObject block)
+    {
+        if (carriedBlock == null)
+        {
+            carriedBlock = block;
+            block.transform.SetParent(transform);
+            block.transform.localPosition = Vector3.zero;
+        }
+        else
+        {
+            carriedBlock.transform.SetParent(null);
+            carriedBlock = null;
+        }
+    }
+
+    public void BreakIce(GameObject iceBlock)
+    {
+        // Implement logic to break the ice block
+        Destroy(iceBlock);
+    }
+
+    public bool HasItem(string itemName)
+    {
+        bool hasItem = GlobalData.inventory.Contains(itemName);
+        Debug.Log("Checking for item: " + itemName + " - Has item: " + hasItem);
+        return hasItem;
+    }
+
+    public void UseItem(string itemName)
+    {
+        if (GlobalData.inventory.Contains(itemName))
+        {
+            GlobalData.inventory.Remove(itemName);
+            Debug.Log("Used item: " + itemName);
+        }
+        else
+        {
+            Debug.Log("Item not found in inventory: " + itemName);
+        }
+    }
+
+    public bool AreAllEnemiesDefeated()
+    {
+        bool allEnemiesDefeated = GameObject.FindGameObjectsWithTag("Enemy").Length == 0;
+        Debug.Log("Are all enemies defeated: " + allEnemiesDefeated);
+        return allEnemiesDefeated;
+    }
+
+
+    // Update FixedUpdate method to check for interaction input
     void FixedUpdate()
     {
         movePlayer();
         attack();
         updateGUI();
 
-		if (Input.GetKeyDown(pickUpKeyCode))
+        if (Input.GetKeyDown(pickUpKeyCode))
         {
             if (carriedBlock == null && playerNearbyBlock != null)
             {
@@ -99,6 +164,19 @@ public class Player : Entity
                 // Drop the block
                 carriedBlock.GetComponent<BlockInteraction>().Drop();
                 carriedBlock = null;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 1f);
+            foreach (Collider2D collider in colliders)
+            {
+                PuzzleItem puzzleItem = collider.GetComponent<PuzzleItem>();
+                if (puzzleItem != null)
+                {
+                    // Interact with the puzzle item
+                }
             }
         }
     }
@@ -121,7 +199,7 @@ public class Player : Entity
             rigidBody.velocity = new Vector2(isDashingRight ? -dashingSpeed : dashingSpeed, 0);
             useMana(dashingManaUse);
         }
-        else if(dashingTimer > dashingTimeout - dashingTimelimit)
+        else if (dashingTimer > dashingTimeout - dashingTimelimit)
         {
             rigidBody.velocity = new Vector2(isDashingRight ? -dashingSpeed : dashingSpeed, 0);
         }
@@ -149,7 +227,7 @@ public class Player : Entity
             rigidBody.velocity = new Vector2(0, rigidBody.velocity.y);
         }
 
-        if(dashingTimer > 0)
+        if (dashingTimer > 0)
         {
             dashingTimer -= Time.deltaTime;
         }
@@ -190,7 +268,7 @@ public class Player : Entity
     /// <returns>true if the mana was used, false otherwise</returns>
     public Boolean useMana(float manaUsed)
     {
-        if(mana - manaUsed >= 0) 
+        if (mana - manaUsed >= 0)
         {
             mana -= manaUsed;
             return true;
@@ -220,7 +298,7 @@ public class Player : Entity
         if (currentLevel != newLevel)
         {
             levelUp();
-            
+
         }
     }
 
@@ -262,17 +340,13 @@ public class Player : Entity
         addExperience(3);
         addHealth(2);
         mana += 2;
-        if(mana > maxMana)
+        if (mana > maxMana)
         {
             mana = maxMana;
         }
         updateGUI();
     }
 
-	public void pickUpKey()
-    {
-        hasKey = true;
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -283,7 +357,7 @@ public class Player : Entity
             audioManager.PlaySFX(audioManager.ItemCollect);
         }
 
-		if (collision.gameObject.CompareTag("Block"))
+        if (collision.gameObject.CompareTag("Block"))
         {
             playerNearbyBlock = collision.gameObject;
         }
@@ -300,11 +374,11 @@ public class Player : Entity
             hitting = false;
             GameObject enemy = collision.gameObject;
             enemy.GetComponent<Enemy>().takeDamage(damage);
-            
+
         }
     }
 
-	private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Block"))
         {
@@ -335,6 +409,4 @@ public class Player : Entity
             onGround = false;
         }
     }
-
-  
 }

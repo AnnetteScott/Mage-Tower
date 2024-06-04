@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 [System.Serializable]
 public class SavedData
@@ -15,6 +14,7 @@ public class SavedData
     public static float playerArmour;
     public static int currentSceneIndex = 0;
     public static ArrayList inventory = new ArrayList();
+    public static Dictionary<string, bool> puzzleStates = new Dictionary<string, bool>();
 
     public SavedData()
     {
@@ -28,6 +28,7 @@ public class SavedData
         playerArmour = GlobalData.playerArmour;
         currentSceneIndex = GlobalData.currentSceneIndex;
         inventory = GlobalData.inventory;
+        puzzleStates = GlobalData.puzzleStates;
     }
 
     public void LoadData()
@@ -42,5 +43,6 @@ public class SavedData
         GlobalData.playerArmour = playerArmour;
         GlobalData.currentSceneIndex = currentSceneIndex;
         GlobalData.inventory = inventory;
+        GlobalData.puzzleStates = puzzleStates;
     }
 }

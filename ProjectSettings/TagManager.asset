@@ -18,6 +18,7 @@ TagManager:
   - Crypt Door
   - Secret Passage
   - Audio
+  - PuzzleItem
   layers:
   - Default
   - TransparentFX
