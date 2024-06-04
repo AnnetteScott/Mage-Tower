@@ -15,4 +15,18 @@ public static class GlobalData
     public static float playerArmour;
     public static int currentSceneIndex = 0;
     public static ArrayList inventory = new ArrayList();
+
+    public static void reset()
+    {
+        playerMaxMana = 1.0f;
+        playerMaxHealth = 1.0f;
+        playerXP = 0;
+        playerLevel = 1;
+        equippedStaffItem = null;
+        equippedArmourItem = null;
+        playerPower = 1;
+        playerArmour = 1;
+        currentSceneIndex = 0;
+        inventory = new ArrayList();
+    }
 }

@@ -5,11 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-
+    /// <summary>
+    /// This creates a new game
+    /// </summary>
     public void PlayGame ()
     {
         //Need to add "Game" scene to build settings in unity after the 'MainMenu' for this to function, waiting on game creation
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        GlobalData.reset();
         Time.timeScale = 1f;
     }
 
