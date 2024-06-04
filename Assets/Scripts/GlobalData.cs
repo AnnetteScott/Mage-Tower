@@ -18,8 +18,8 @@ public static class GlobalData
 
     public static void reset()
     {
-        playerMaxMana = 1.0f;
-        playerMaxHealth = 1.0f;
+        playerMaxMana = 0f;
+        playerMaxHealth = 0f;
         playerXP = 0;
         playerLevel = 1;
         equippedStaffItem = null;
