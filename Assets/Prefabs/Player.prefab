@@ -1126,7 +1126,7 @@ MonoBehaviour:
   feetCollider: {fileID: 396522273519855524}
   bodyCollider: {fileID: 8587842702236181806}
   playerSprite: {fileID: 3008215847361205683}
-  jumpHeight: 6
+  jumpHeight: 8
   walkingSpeed: 4
   runningSpeed: 6
   maxMana: 10
@@ -1223,6 +1223,9 @@ MonoBehaviour:
       m_Action: Mouse
       m_Flags: 0
     m_Flags: 0
+  pickUpKeyCode: 98
+  hasKey: 0
+  PopUpLevelUpPrefeb: {fileID: 2336303339269453966, guid: f93771efeaea94122934bf78bc91baca, type: 3}
   isFlipped: 0
 --- !u!50 &1410061253463331633
 Rigidbody2D:

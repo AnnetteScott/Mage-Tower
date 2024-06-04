@@ -2,17 +2,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEditor.UIElements.ToolbarMenu;
 
 public class Inventory : MonoBehaviour, IPointerDownHandler
 {
     public static bool GameIsPaused = false;
     public GameObject inventoryUI;
     public GameObject staffSlot;
-    public GameObject amourSlot;
+    public GameObject armourSlot;
     public GameObject InventorySlots;
     public TextMeshProUGUI itemPower;
+    public TextMeshProUGUI playerStats;
     public Image playerImage;
     public Image staffCrystal;
     private GameObject clickedItem;
@@ -27,6 +26,8 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
     // Update is called once per frame
     void Update()
     {
+        //update stats for the player
+        setPlayerStats();
         //Show the inventory menu
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -44,7 +45,7 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
     }
 
     /// <summary>
-    /// Display all the items in the inventory meny
+    /// Display all the items in the inventory menu
     /// </summary>
     private void displayInventoryItems()
     {
@@ -62,13 +63,13 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
             Destroy(staffSlot.transform.GetChild(0).gameObject);
         }
 
-        if (amourSlot.transform.childCount > 0)
+        if (armourSlot.transform.childCount > 0)
         {
-            Destroy(amourSlot.transform.GetChild(0).gameObject);
+            Destroy(armourSlot.transform.GetChild(0).gameObject);
         }
 
         staffSlot.gameObject.GetComponent<Image>().color = Color.white;
-        amourSlot.gameObject.GetComponent<Image>().color = Color.white;
+        armourSlot.gameObject.GetComponent<Image>().color = Color.white;
 
         //Add all items
         int index = 0;
@@ -94,7 +95,7 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
         {
             var resource = Resources.Load(GlobalData.equippedArmourItem);
             GameObject newInstance = Instantiate(resource) as GameObject;
-            newInstance.transform.SetParent(amourSlot.transform);
+            newInstance.transform.SetParent(armourSlot.transform);
             string variant = newInstance.name.Replace("(Clone)", "").Replace(" Variant", "").Split(" - ")[1];
             playerImage.sprite = (Sprite)Resources.Load("Player - " + variant, typeof(Sprite));
         }
@@ -152,8 +153,16 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
         }
         else if (clickedItem.GetComponent<Armour>() != null)
         {
-            itemPower.text = "Amour: " + clickedItem.GetComponent<Armour>().armour.ToString();
+            itemPower.text = "Armour: " + clickedItem.GetComponent<Armour>().armour.ToString();
         }
+    }
+
+    /// <summary>
+    /// Display the player stats
+    /// </summary>
+    private void setPlayerStats()
+    {
+        playerStats.text = "Power: " + GlobalData.playerPower + "\n" + "Armour: " + GlobalData.playerArmour + "\n\n" + "Health: " + GlobalData.playerMaxHealth + "\n" + "Mana: " + GlobalData.playerMaxMana + "\n" + "Level: " + GlobalData.playerLevel + " (" + GlobalData.playerXP + " XP)";
     }
 
     /// <summary>
@@ -184,9 +193,9 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
         }
         else if (clickedItem.GetComponent<Armour>() != null)
         {
-            if (amourSlot.transform.childCount > 0)
+            if(armourSlot.transform.childCount > 0)
             {
-                GameObject item = amourSlot.transform.GetChild(0).gameObject;
+                GameObject item = armourSlot.transform.GetChild(0).gameObject;
                 GlobalData.inventory.Add(item.name.Replace("(Clone)", ""));
             }
 
@@ -229,13 +238,15 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
         GlobalData.inventory.Add(clickedItem.name.Replace("(Clone)", ""));
         if (clickedItem.GetComponent<Weapon>() != null)
         {
-            player.GetComponent<Player>().power = 0;
+            player.GetComponent<Player>().power = 1;
             GlobalData.equippedStaffItem = null;
+            GlobalData.playerPower = 1;
         }
         else if (clickedItem.GetComponent<Armour>() != null)
         {
             GlobalData.equippedArmourItem = null;
             player.GetComponent<Player>().armour = 0;
+            GlobalData.playerArmour = 0;
         }
         Image slotImage = clickedItem.transform.parent.gameObject.GetComponent<Image>();
         slotImage.color = Color.white;

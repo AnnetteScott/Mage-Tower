@@ -3,32 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Enemy
-  - Ground
-  - Weapon
-  - Projectile
-  - Spark
-  - Item
-  - StaffCrystal
-  - LevelCanvas
-  - Key
-  - Block
-  - Torch
-  - Crypt Door
-  - Secret Passage
-  - PuzzleItem
-  - BlockOfIce
-  - MovableBox
-  - MovableBlock
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Fire Spark
+  - 
   - Water
   - UI
-  - Player
+  - 
   - 
   - 
   - 
@@ -57,7 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: FireSpark Layer
-    uniqueID: 1646417805
     locked: 0

@@ -24,10 +24,13 @@ public class Player : Entity
     public InputAction dash;
     public InputAction run;
     public InputAction mouse;
+
     public KeyCode pickUpKeyCode = KeyCode.B;
     public KeyCode interactKeyCode = KeyCode.E;
     public KeyCode useKeyCode = KeyCode.Q;
     public bool hasKey = false;
+
+    public GameObject PopUpLevelUpPrefeb;
 
     private float mana;
     private int experience;
@@ -49,8 +52,11 @@ public class Player : Entity
 
     public bool isFlipped = false;
 
+    AudioManager audioManager;
+
     void Start()
     {
+
         if (GlobalData.playerMaxHealth == 0)
         {
             GlobalData.playerMaxHealth = maxHealth;
@@ -69,11 +75,15 @@ public class Player : Entity
         dash.Enable();
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.freezeRotation = true;
+        rigidBody.gravityScale = 3.0f;
         mana = maxMana;
         updateGUI();
 
         power = GlobalData.playerPower;
         armour = GlobalData.playerArmour;
+
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
     }
 
     void Update()
@@ -176,7 +186,7 @@ public class Player : Entity
 
             if (onGround && moveValue.y != 0.0f)
             {
-                rigidBody.velocity = new Vector2(moveValue.x * speed, jumpHeight);
+                rigidBody.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse);
             }
             else
             {
@@ -247,6 +257,7 @@ public class Player : Entity
         if (currentLevel != newLevel)
         {
             levelUp();
+            
         }
     }
 
@@ -256,6 +267,8 @@ public class Player : Entity
         setHealthToMax();
         this.maxMana += 2;
         mana = maxMana;
+        audioManager.PlaySFX(audioManager.levelUp);
+        Instantiate(PopUpLevelUpPrefeb, transform.position, Quaternion.identity);
     }
 
     public int getExperience()
@@ -279,6 +292,7 @@ public class Player : Entity
 
     public void killedEnemy()
     {
+        audioManager.PlaySFX(audioManager.EnemyDead);
         addExperience(3);
         addHealth(2);
         mana += 2;
@@ -286,7 +300,6 @@ public class Player : Entity
         {
             mana = maxMana;
         }
-
         updateGUI();
     }
 
@@ -295,6 +308,11 @@ public class Player : Entity
         hasKey = true;
     }
 
+    /// <summary>
+    /// If the staff hits an enemy and the player has swang, do damage to the enemy
+    /// </summary>
+    /// <param name="collision"></param>
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") && hitting)
@@ -302,6 +320,7 @@ public class Player : Entity
             hitting = false;
             GameObject enemy = collision.gameObject;
             enemy.GetComponent<Enemy>().takeDamage(damage);
+            
         }
     }
 
