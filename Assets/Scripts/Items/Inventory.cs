@@ -233,9 +233,14 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
             return;
         }
 
-        Transform nextSlot = InventorySlots.transform.GetChild(GlobalData.inventory.Count);
-        clickedItem.transform.SetParent(nextSlot);
-        GlobalData.inventory.Add(clickedItem.name.Replace("(Clone)", ""));
+        if(GlobalData.equippedStaffItem != null || GlobalData.equippedArmourItem != null)
+        {
+            Transform nextSlot = InventorySlots.transform.GetChild(GlobalData.inventory.Count);
+            clickedItem.transform.SetParent(nextSlot);
+            GlobalData.inventory.Add(clickedItem.name.Replace("(Clone)", ""));
+        }
+
+        
         if (clickedItem.GetComponent<Weapon>() != null)
         {
             player.GetComponent<Player>().power = 1;
@@ -253,6 +258,7 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
         displayInventoryItems();
         clickedItem = null;
         itemPower.text = string.Empty;
+        setPlayerVisuals();
     }
 
     public void Resume()

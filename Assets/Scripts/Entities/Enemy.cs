@@ -15,7 +15,8 @@ public class Enemy : Entity
     public void Start()
     {
         setHealthToMax();
-        armour = SceneManager.GetActiveScene().buildIndex;
+        armour = (int)SceneManager.GetActiveScene().buildIndex / 2;
+        damage += (int)SceneManager.GetActiveScene().buildIndex / 2;
     }
 
     private void Update()
