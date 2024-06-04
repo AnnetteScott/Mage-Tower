@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 1f5e36e69c03e104b83a10ffca19fd3a, type: 3}
     - target: {fileID: 2759128324457491620, guid: ee138be360225d4418c2354b734c4757, type: 3}
       propertyPath: m_Name
-      value: Amour - Orange Variant
+      value: Armour - Orange Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3267962907042198654, guid: ee138be360225d4418c2354b734c4757, type: 3}
       propertyPath: m_Sprite
@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 1f5e36e69c03e104b83a10ffca19fd3a, type: 3}
     - target: {fileID: 8185369928921497115, guid: ee138be360225d4418c2354b734c4757, type: 3}
       propertyPath: armour
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8305444471087351533, guid: ee138be360225d4418c2354b734c4757, type: 3}
       propertyPath: m_Pivot.x

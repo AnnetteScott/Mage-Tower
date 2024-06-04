@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 235050841993030039, guid: 5235f8cd369a3004e8572b555f1ad8ef, type: 3}
       propertyPath: m_Name
-      value: Amour - Green Variant
+      value: Armour - Green Variant
       objectReference: {fileID: 0}
     - target: {fileID: 599918946518331725, guid: 5235f8cd369a3004e8572b555f1ad8ef, type: 3}
       propertyPath: m_Sprite

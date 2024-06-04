@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : Entity
 {
@@ -14,6 +15,7 @@ public class Enemy : Entity
     public void Start()
     {
         setHealthToMax();
+        armour = SceneManager.GetActiveScene().buildIndex;
     }
 
     private void Update()

@@ -42,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6464710683155384723, guid: 770e16371b76a9b4a94c6811b7edf878, type: 3}
       propertyPath: m_Name
-      value: StaffCrystal - Yellow Variant
+      value: Staff - Yellow Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7457570498727680369, guid: 770e16371b76a9b4a94c6811b7edf878, type: 3}
       propertyPath: m_Pivot.x
