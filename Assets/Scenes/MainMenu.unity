@@ -405,8 +405,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Move - WASD\n\tdash: ctrl\n\nInventory - Tab\n\nAim - Mouse\n\tfire spells:
-    right click\n\tmelee attack: left click\n\nPause menu - Escape\n"
+  m_text: "Move - WASD\n\tdash: ctrl\n\nInventory - Tab\n\nAttack & Spells \n\tswap
+    spells: num 1, 2, &3\n\tfire spells: right click\n\tmelee attack: left click\n\nPause
+    menu - Escape\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e6e60654d4c5bc94e9ceaa026bda236d, type: 2}
   m_sharedMaterial: {fileID: 3514820578698833661, guid: e6e60654d4c5bc94e9ceaa026bda236d, type: 2}
@@ -2391,7 +2392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1298900372
 RectTransform:
   m_ObjectHideFlags: 0
