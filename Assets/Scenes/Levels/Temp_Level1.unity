@@ -1340,7 +1340,6 @@ MonoBehaviour:
   musicSource: {fileID: 1748638775}
   SFXSource: {fileID: 847683367}
   background: {fileID: 8300000, guid: c889d5c82332949bbb7a6b53827ce3a3, type: 3}
-  levelCompleted: {fileID: 8300000, guid: 3237435d2f09d412ab04c04f9f316269, type: 3}
   levelUp: {fileID: 8300000, guid: 3237435d2f09d412ab04c04f9f316269, type: 3}
   hit: {fileID: 8300000, guid: fc877c80d2f894eac95e0af3ef37886b, type: 3}
   EnemyDead: {fileID: 8300000, guid: 108cba96604f644b49909c49ea32d9fc, type: 3}
@@ -1389,7 +1388,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.12
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2876,7 +2875,6 @@ MonoBehaviour:
   musicSource: {fileID: 0}
   SFXSource: {fileID: 0}
   background: {fileID: 8300000, guid: c889d5c82332949bbb7a6b53827ce3a3, type: 3}
-  levelCompleted: {fileID: 0}
   levelUp: {fileID: 0}
   hit: {fileID: 0}
   EnemyDead: {fileID: 0}
@@ -3072,7 +3070,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.11
   m_Pitch: 1
   Loop: 1
   Mute: 0

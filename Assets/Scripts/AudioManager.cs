@@ -11,7 +11,6 @@ public class AudioManager : MonoBehaviour
 
     [Header("-----------Audio Clip-----------")]
     public AudioClip background;
-    public AudioClip levelCompleted;
     public AudioClip levelUp;
     public AudioClip hit;
     public AudioClip EnemyDead;
