@@ -34,12 +34,6 @@ public class BouncyBullet : Bullet
             {
                 Destroy(gameObject);
             }
-            /*else
-            {
-                // Reflect the bullet's velocity upon collision
-                Vector2 normal = collision.contacts[0].normal; // Get the collision normal from the first contact point
-                rb.velocity = Vector2.Reflect(rb.velocity, normal);
-            } */
         }
     }
 }
