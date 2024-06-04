@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2307614876613869897, guid: 55e82a50af103354681fb7e5092b28c7, type: 3}
       propertyPath: armour
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2512112121108068799, guid: 55e82a50af103354681fb7e5092b28c7, type: 3}
       propertyPath: m_Pivot.x
@@ -98,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 7a1ffb5b7b6c6be4b9deb10788b09d35, type: 3}
     - target: {fileID: 8634642399814767606, guid: 55e82a50af103354681fb7e5092b28c7, type: 3}
       propertyPath: m_Name
-      value: Amour - Pink Variant
+      value: Armour - Pink Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8990363425508592428, guid: 55e82a50af103354681fb7e5092b28c7, type: 3}
       propertyPath: m_Size.x

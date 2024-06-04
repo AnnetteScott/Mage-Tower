@@ -75,6 +75,7 @@ public class Player : Entity
 
         power = GlobalData.playerPower;
         armour = GlobalData.playerArmour;
+        damage += (int)GlobalData.playerPower;
 
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
 

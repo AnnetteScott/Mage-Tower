@@ -43,13 +43,13 @@ public class FireSpark : Bullet
     {
         if (collision.gameObject.CompareTag("Enemy") && hitTimer <= 0f)
         {
-            collision.gameObject.GetComponent<Enemy>().takeDamage(damage);
+            collision.gameObject.GetComponent<Enemy>().takeDamage(getDamage());
             hitTimer = hitTimeout; //Reset the hit timer
         }
 
         if (collision.gameObject.CompareTag("Player") && hitTimer <= 0f)
         {
-            collision.gameObject.GetComponent<Player>().takeDamage(damage);
+            collision.gameObject.GetComponent<Player>().takeDamage(getDamage());
             hitTimer = hitTimeout; //Reset the hit timer
         }
     }

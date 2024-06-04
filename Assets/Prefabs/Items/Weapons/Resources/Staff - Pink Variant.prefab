@@ -38,11 +38,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6175674843460160258, guid: 770e16371b76a9b4a94c6811b7edf878, type: 3}
       propertyPath: power
-      value: 3.5
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 6464710683155384723, guid: 770e16371b76a9b4a94c6811b7edf878, type: 3}
       propertyPath: m_Name
-      value: StaffCrystal - Pink Variant
+      value: Staff - Pink Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7457570498727680369, guid: 770e16371b76a9b4a94c6811b7edf878, type: 3}
       propertyPath: m_Pivot.x
