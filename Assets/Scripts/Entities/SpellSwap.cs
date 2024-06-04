@@ -13,7 +13,7 @@ public class SpellSwap : MonoBehaviour
     [SerializeField] private Sprite fireStaffSprite;
 
     private Transform currentSpell;
-    private SpriteRenderer staffRenderer;
+    private SpriteRenderer staffCrystal;
     private Player playerScript; 
 
     //Mana costs for each spell
@@ -26,7 +26,7 @@ public class SpellSwap : MonoBehaviour
         // Set the default spell to MagicBullet
         currentSpell = MagicBullet;
         // Find the renderer of the staff
-        staffRenderer = transform.Find("Aim/Staff").GetComponent<SpriteRenderer>();
+        staffCrystal = transform.Find("Aim/Staff/StaffCrystal").GetComponent<SpriteRenderer>();
         playerScript = GetComponent<Player>();
     }
 
@@ -38,13 +38,13 @@ public class SpellSwap : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 currentSpell = MagicBullet;
-                staffRenderer.sprite = magicStaffSprite;
+                staffCrystal.sprite = magicStaffSprite;
                 Debug.Log("Switched to Magic Bullet");
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 currentSpell = BouncyBullet;
-                staffRenderer.sprite = bouncyStaffSprite;
+                staffCrystal.sprite = bouncyStaffSprite;
                 Debug.Log("Switched to Bouncy Bullet");
             }
 
@@ -53,7 +53,7 @@ public class SpellSwap : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Alpha3))
                 {
                     currentSpell = FireSpark;
-                    staffRenderer.sprite = fireStaffSprite;
+                    staffCrystal.sprite = fireStaffSprite;
                     Debug.Log("Switched to Fire Spark");
                 }
             }

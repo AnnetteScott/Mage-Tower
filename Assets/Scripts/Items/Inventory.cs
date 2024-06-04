@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
     public TextMeshProUGUI itemPower;
     public TextMeshProUGUI playerStats;
     public Image playerImage;
-    public Image staffCrystal;
+    public Image staff;
     private GameObject clickedItem;
     private GameObject player;
 
@@ -90,7 +90,7 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
             GameObject newInstance = Instantiate(resource) as GameObject;
             newInstance.transform.SetParent(staffSlot.transform);
             string variant = newInstance.name.Replace("(Clone)", "").Replace(" Variant", "").Split(" - ")[1];
-            staffCrystal.sprite = (Sprite)Resources.Load("Staff Crystal - " + variant, typeof(Sprite));
+            staff.sprite = (Sprite)Resources.Load("Staff - " + variant, typeof(Sprite));
         }
 
         if(GlobalData.equippedArmourItem != null)
@@ -108,18 +108,26 @@ public class Inventory : MonoBehaviour, IPointerDownHandler
     /// </summary>
     private void setPlayerVisuals()
     {
+        GameObject staff = GameObject.FindGameObjectWithTag("Weapon");
         if (GlobalData.equippedStaffItem != null)
         {
-            string crystalVariant = GlobalData.equippedStaffItem.Replace(" Variant", "").Split(" - ")[1];
-            GameObject[] staffCrystal = GameObject.FindGameObjectsWithTag("StaffCrystal");
-            staffCrystal[0].GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("Staff Crystal - " + crystalVariant, typeof(Sprite));
+            string variant = GlobalData.equippedStaffItem.Replace(" Variant", "").Split(" - ")[1];
+            staff.GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("Staff - " + variant, typeof(Sprite));
+        }
+        else
+        {
+            staff.GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("Staff", typeof(Sprite));
         }
 
         if (GlobalData.equippedArmourItem != null)
         {
             string armourVariant = GlobalData.equippedArmourItem.Replace(" Variant", "").Split(" - ")[1];
             player.GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("Player - " + armourVariant, typeof(Sprite));
-        }  
+        }
+        else
+        {
+            player.GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("Player", typeof(Sprite));
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
