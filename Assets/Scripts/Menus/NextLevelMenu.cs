@@ -14,20 +14,26 @@ public class LevelMenu : MonoBehaviour
     // Update is called once per frame
     void Update () {
         
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        Player player = players[0].GetComponent<Player>();
-        GlobalData.playerMaxHealth = player.maxHealth;
-        GlobalData.playerMaxMana = player.maxMana;
-        GlobalData.playerXP = player.getExperience();
-        GlobalData.playerLevel = player.getLevel();
+        GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
+        Player player;
+        if (playerGO != null)
+        {
+            player = playerGO.GetComponent<Player>();
+            GlobalData.playerMaxHealth = player.maxHealth;
+            GlobalData.playerMaxMana = player.maxMana;
+            GlobalData.playerXP = player.getExperience();
+            GlobalData.playerLevel = player.getLevel();
+        }
+        
  
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && GameObject.FindGameObjectsWithTag("Item").Length == 0)
         {
             if (!addXP)
             {
 
-                if (players.Length > 0)
+                if (playerGO != null)
                 {
+                    player = playerGO.GetComponent<Player>();
                     player.addExperience(2);
                     GlobalData.playerMaxHealth = player.maxHealth;
                     GlobalData.playerMaxMana = player.maxMana;
